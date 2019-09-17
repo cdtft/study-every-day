@@ -1,4 +1,4 @@
-package com.cdtft.netty.firstexample;
+package com.cdtft.netty.helloworld;
 
 
 import io.netty.bootstrap.ServerBootstrap;
