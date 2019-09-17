@@ -23,7 +23,7 @@ public class TestServer {
                     //自定义服务器端的初始化器
                     .childHandler(new TestServerInitializer());
 
-            ChannelFuture channelFuture = bootstrap.bind(8080).sync();
+            ChannelFuture channelFuture = bootstrap.bind(9090).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
