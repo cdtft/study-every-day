@@ -15,6 +15,11 @@ import java.util.UUID;
 public class WebSocketServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        ctx.channel().writeAndFlush("this is start");
+    }
+
+    @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         //打印来自客户端的信息
         System.out.println(ctx.channel().remoteAddress() + ":" + msg);

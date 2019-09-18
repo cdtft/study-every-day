@@ -16,6 +16,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class WebSocketServer {
 
     public static void main(String[] args) {
+        System.out.println("websocket服务端开始启动");
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup worker = new NioEventLoopGroup();
         try {
@@ -23,7 +24,7 @@ public class WebSocketServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new WebSocketServerInitializer());
             ChannelFuture channelFuture = serverBootstrap.bind(9091).sync();
-            channelFuture.channel().closeFuture();
+            channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
