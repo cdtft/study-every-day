@@ -1,4 +1,4 @@
-package com.cdtft.netty.websocket;
+package com.cdtft.netty.socket;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -12,7 +12,7 @@ import java.util.UUID;
  * @date 2019/9/17 23:44
  * @email 453451180@qq.com
  **/
-public class WebSocketServerHandler extends SimpleChannelInboundHandler<String> {
+public class SocketServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {

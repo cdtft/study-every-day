@@ -1,4 +1,4 @@
-package com.cdtft.netty.websocket;
+package com.cdtft.netty.socket;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -13,7 +13,7 @@ import io.netty.util.CharsetUtil;
  * @author : wangcheng
  * @date : 2019年09月18日 14:23
  */
-public class WebSocketClientInitializer extends ChannelInitializer<SocketChannel> {
+public class SocketClientInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
@@ -26,6 +26,6 @@ public class WebSocketClientInitializer extends ChannelInitializer<SocketChannel
         channelPipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
         channelPipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
         //添加自定义处理器
-        channelPipeline.addLast(new WebSocketClientHandler());
+        channelPipeline.addLast(new SocketClientHandler());
     }
 }

@@ -1,4 +1,4 @@
-package com.cdtft.netty.websocket;
+package com.cdtft.netty.socket;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -10,7 +10,7 @@ import java.util.Date;
  * @author : wangcheng
  * @date : 2019年09月18日 14:29
  */
-public class WebSocketClientHandler extends SimpleChannelInboundHandler<String> {
+public class SocketClientHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {

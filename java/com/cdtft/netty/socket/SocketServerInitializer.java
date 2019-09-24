@@ -1,4 +1,4 @@
-package com.cdtft.netty.websocket;
+package com.cdtft.netty.socket;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -14,7 +14,7 @@ import io.netty.util.CharsetUtil;
  * @date 2019/9/17 21:48
  * @email 453451180@qq.com
  **/
-public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel> {
+public class SocketServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
@@ -27,6 +27,6 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
         channelPipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
         channelPipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
         //添加自定义处理器
-        channelPipeline.addLast(new WebSocketServerHandler());
+        channelPipeline.addLast(new SocketServerHandler());
     }
 }

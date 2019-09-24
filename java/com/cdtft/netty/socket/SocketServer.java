@@ -1,4 +1,4 @@
-package com.cdtft.netty.websocket;
+package com.cdtft.netty.socket;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -13,7 +13,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * @date 2019/9/17 20:44
  * @email 453451180@qq.com
  **/
-public class WebSocketServer {
+public class SocketServer {
 
     public static void main(String[] args) {
         System.out.println("websocket服务端开始启动");
@@ -22,7 +22,7 @@ public class WebSocketServer {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap().group(boss, worker)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new WebSocketServerInitializer());
+                    .childHandler(new SocketServerInitializer());
             ChannelFuture channelFuture = serverBootstrap.bind(9091).sync();
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
