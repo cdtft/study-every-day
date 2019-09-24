@@ -7,7 +7,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
- * websocket客户端
+ * socket客户端
  *
  * @author : wangcheng
  * @date : 2019年09月18日 13:46
