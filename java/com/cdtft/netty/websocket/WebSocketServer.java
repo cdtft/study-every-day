@@ -26,8 +26,8 @@ public class WebSocketServer {
                     .group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .childHandler(null);
-            ChannelFuture channelFuture = serverBootstrap.bind("localhost", 8080).sync();
+                    .childHandler(new WebSocketServerInitializer());
+            ChannelFuture channelFuture = serverBootstrap.bind(8080).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
