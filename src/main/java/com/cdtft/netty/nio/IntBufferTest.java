@@ -8,7 +8,7 @@ import java.security.SecureRandom;
  * @date 2019/10/16 22:57
  * @email 453451180@qq.com
  **/
-public class Test1 {
+public class IntBufferTest {
 
     public static void main(String[] args) {
         IntBuffer intBuffer = IntBuffer.allocate(10);
