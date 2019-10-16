@@ -14,13 +14,10 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'io.netty', name: 'netty-all', version: '4.1.0.Final'
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'java'
-        }
-    }
+//    compile group: 'io.netty', name: 'netty-all', version: '4.1.0.Final'
+    compile(
+            'io.netty:netty-all:4.1.0.Final',
+            'com.google.protobuf:protobuf-java:3.9.2',
+            'com.google.protobuf:protobuf-java-util:3.9.2'
+    )
 }
