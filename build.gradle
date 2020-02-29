@@ -9,23 +9,23 @@ sourceCompatibility = 1.8
 
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-    maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 //    compile group: 'io.netty', name: 'netty-all', version: '4.1.0.Final'
     compile(
             'io.netty:netty-all:4.1.0.Final',
             'com.google.protobuf:protobuf-java:3.9.2',
-            'com.google.protobuf:protobuf-java-util:3.9.2'
+            'com.google.protobuf:protobuf-java-util:3.9.2',
+            'junit:junit:4.12'
     )
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir 'java'
-        }
-    }
-}
+//sourceSets {
+//    main {
+//        java {
+//            srcDir 'java'
+//        }
+//    }
+//}
