@@ -1,5 +1,7 @@
 package com.cdtft.leetcode;
 
+import org.w3c.dom.NodeList;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,9 +120,27 @@ public class Solution {
         return romanInt;
     }
 
+    /**
+     * 反转链表
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+        return reverse(null, head);
+    }
+
+    private ListNode reverse(ListNode pre, ListNode cur) {
+        if (cur == null) {
+            return pre;
+        }
+        ListNode nextNode = cur.next;
+        cur.next = pre;
+        return reverse(cur, nextNode);
+    }
+
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.romanToInt("VI"));
+       // ListNode node1 = new ListNode();
     }
 
 }
