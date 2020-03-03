@@ -2,6 +2,7 @@ package com.cdtft.leetcode;
 
 import org.w3c.dom.NodeList;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,9 +89,9 @@ public class Solution {
         charMap.put('D', 500);
         charMap.put('M', 1000);
         int romanInt = 0;
-        for (int i = 0; i <= s.length()-1; i++) {
+        for (int i = 0; i <= s.length() - 1; i++) {
 
-            if (i == s.length()-1) {
+            if (i == s.length() - 1) {
                 romanInt = romanInt + charMap.get(s.charAt(i));
                 break;
             }
@@ -127,6 +128,7 @@ public class Solution {
      * @return
      */
     public ListNode reverseList(ListNode head) {
+        //关键就是在于在遍历的时候要有一个假象的null节点。
         return reverse(null, head);
     }
 
@@ -139,8 +141,29 @@ public class Solution {
         return reverse(cur, nextNode);
     }
 
+    public void merge(int[] A, int m, int[] B, int n) {
+        for (int i = 0; i < n ; i++) {
+            A[m + i - 1] = B[i];
+        }
+        popSort(A);
+    }
+
+    private static void popSort(int[] C) {
+        for (int i = 0; i < C.length; i++) {
+            for (int j = 1; j < C.length; j++) {
+                if (C[j - 1] > C[j]) {
+                    int swap = C[j - 1];
+                    C[j - 1] = C[j];
+                    C[j] = swap;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
-       // ListNode node1 = new ListNode();
+        int[] a = {2,3,5,2,1,6};
+        popSort(a);
+        System.out.println(Arrays.toString(a));
     }
 
 }
