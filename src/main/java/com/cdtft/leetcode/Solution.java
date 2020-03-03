@@ -142,9 +142,7 @@ public class Solution {
     }
 
     public void merge(int[] A, int m, int[] B, int n) {
-        for (int i = 0; i < n ; i++) {
-            A[m + i - 1] = B[i];
-        }
+        if (n >= 0) System.arraycopy(B, 0, A, m - 1, n);
         popSort(A);
     }
 
@@ -160,10 +158,22 @@ public class Solution {
         }
     }
 
+    public void merge2(int[] A, int m, int[] B, int n) {
+        int index = m + n - 1;
+        int indexA = m - 1;
+        int indexB = n - 1;
+        while (indexA >= 0 && indexB >= 0) {
+            if (A[indexA] > B[indexB]) {
+                A[index--] = A[indexA--];
+            } else {
+                A[index--] = B[indexB--];
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        int[] a = {2,3,5,2,1,6};
-        popSort(a);
-        System.out.println(Arrays.toString(a));
+        int[] a = {1, 2, 3, 0, 0, 0};
+        int[] b = {2, 5, 6};
     }
 
 }

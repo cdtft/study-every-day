@@ -30,4 +30,11 @@ public class SolutionTest {
         ListNode reverseNode = solution.reverseList(node);
         System.out.println(reverseNode.val);
     }
+
+    @Test
+    public void merge2() {
+        int[] a = {1, 2, 3, 0, 0, 0};
+        int[] b = {2, 5, 6};
+        solution.merge2(a, 3, b, 3);
+    }
 }
