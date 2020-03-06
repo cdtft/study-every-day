@@ -171,6 +171,22 @@ public class Solution {
         }
     }
 
+    public int[] distributeCandies(int candies, int num_people) {
+        int num = 1;
+        int[] candyNum = new int[num_people];
+        while(candies > 0) {
+            if (candies <= num) {
+                candyNum[(num-1)%num_people] = candyNum[(num-1)%num_people] + candies;
+                candies = 0;
+                break;
+            }
+            candyNum[(num - 1) % num_people] = candyNum[(num - 1) % num_people] + num;
+            candies = candies - num;
+            num++;
+        }
+        return candyNum;
+    }
+
     public static void main(String[] args) {
         int[] a = {1, 2, 3, 0, 0, 0};
         int[] b = {2, 5, 6};
