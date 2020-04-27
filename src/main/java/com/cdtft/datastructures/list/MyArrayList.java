@@ -31,19 +31,40 @@ public class MyArrayList<T> implements Iterable<T> {
         if (index > size) {
             return null;
         }
-        return (T)objects[index];
+        return (T) objects[index];
     }
 
     private void set(int index, T t) {
         if (index < 0 || index > objects.length) {
             throw new IndexOutOfBoundsException("MyArrayList超出数组边界");
         }
-
         this.objects[index] = t;
     }
 
     public void add(T t) {
         this.set(size++, t);
+    }
+
+    public void add(int index, T t) {
+        if (objects.length == size()) {
+            //扩容
+            ensureCapacity(size() * 2);
+        }
+        //考虑如果index不是插入到队列尾部的时候向后移动位置
+
+
+    }
+
+    private void ensureCapacity(int newCapacity) {
+        if (newCapacity < size) {
+            return;
+        }
+        Object[] obj = new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            obj[i] = objects[i];
+        }
+        objects = obj;
+        obj = null; //help gc
     }
 
     @Override
