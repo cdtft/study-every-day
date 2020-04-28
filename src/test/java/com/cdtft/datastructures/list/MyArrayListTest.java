@@ -21,4 +21,15 @@ public class MyArrayListTest {
             System.out.println(myArrayList.get(j));
         }
     }
+
+    @Test
+    public void addIndex() {
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            myArrayList.add(0, i);
+        }
+        for (int j = 0; j < myArrayList.size(); j++) {
+            System.out.println(myArrayList.get(j));
+        }
+    }
 }
