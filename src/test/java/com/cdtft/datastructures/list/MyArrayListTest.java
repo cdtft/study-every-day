@@ -13,5 +13,12 @@ public class MyArrayListTest {
 
     @Test
     public void add() {
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            myArrayList.add(i);
+        }
+        for (int j = 0; j < myArrayList.size(); j++) {
+            System.out.println(myArrayList.get(j));
+        }
     }
 }

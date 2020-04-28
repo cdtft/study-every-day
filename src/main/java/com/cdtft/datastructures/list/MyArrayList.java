@@ -7,7 +7,7 @@ public class MyArrayList<T> implements Iterable<T> {
     /**
      * default capacity
      */
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 3;
 
     /**
      * 当前数组中的元素
@@ -42,17 +42,20 @@ public class MyArrayList<T> implements Iterable<T> {
     }
 
     public void add(T t) {
-        this.set(size++, t);
+        this.add(size, t);
     }
 
     public void add(int index, T t) {
         if (objects.length == size()) {
             //扩容
-            ensureCapacity(size() * 2);
+            ensureCapacity(size() * 2 + 1);
         }
         //考虑如果index不是插入到队列尾部的时候向后移动位置
-
-
+        for(int i = size; i > index; i--) {
+            objects[i] = objects[i - 1];
+        }
+        objects[index] = t;
+        size++;
     }
 
     private void ensureCapacity(int newCapacity) {
