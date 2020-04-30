@@ -42,4 +42,19 @@ public class SolutionTest {
         assert solution.isValid("]]") == false;
     }
 
+    @Test
+    public void mergeTwoLists() {
+        ListNode node1 = new ListNode(1, new ListNode(2, new ListNode(4)));
+        ListNode node2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+        ListNode node = solution.mergeTwoLists(node1, node2);
+        printNode(node);
+    }
+
+    private void printNode(ListNode node) {
+        if (node.next == null) {
+            return;
+        }
+        printNode(node.next);
+        System.out.println(node.val);
+    }
 }
