@@ -63,4 +63,10 @@ public class SolutionTest {
         int[] num = new int[]{1, 1, 2, 2, 5};
         System.out.println(solution.removeDuplicates(num));
     }
+
+    @Test
+    public void bSearch() {
+        int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        System.out.println(solution.bSearch(nums, 0, nums.length, 2));
+    }
 }

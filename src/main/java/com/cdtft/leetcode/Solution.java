@@ -244,4 +244,19 @@ public class Solution {
         return ++preIdx;
     }
 
+    public int bSearch(int[] nums, int left, int right, int value) {
+        //left > rignt
+        if (left > right) {
+            return -1;
+        }
+        int idx = left + (left - right) >> 1;
+        if (nums[idx] > value) {
+            return bSearch(nums, left, idx - 1, value);
+        }
+        if (nums[idx] < value) {
+            return bSearch(nums, idx + 1, right, value);
+        }
+        return idx;
+    }
+
 }
