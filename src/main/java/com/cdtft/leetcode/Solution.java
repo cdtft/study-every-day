@@ -5,6 +5,7 @@ import org.w3c.dom.NodeList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * @author : wangcheng
@@ -174,9 +175,9 @@ public class Solution {
     public int[] distributeCandies(int candies, int num_people) {
         int num = 1;
         int[] candyNum = new int[num_people];
-        while(candies > 0) {
+        while (candies > 0) {
             if (candies <= num) {
-                candyNum[(num-1)%num_people] = candyNum[(num-1)%num_people] + candies;
+                candyNum[(num - 1) % num_people] = candyNum[(num - 1) % num_people] + candies;
                 candies = 0;
                 break;
             }
@@ -187,10 +188,40 @@ public class Solution {
         return candyNum;
     }
 
+    public boolean isValid(String s) {
+        if (s.length() % 2 != 0) {
+            return false;
+        }
+        Map<Character, Character> map = new HashMap<>();
+        map.put(']', '[');
+        map.put('}', '{');
+        map.put(')', '(');
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '[' || c == '{' || c == '(') {
+                stack.push(c);
+            } else {
+                if (stack.size() == 0) {
+                    return false;
+                }
+                char popc = stack.pop();
+                if (popc != map.get(c)) {
+                    return false;
+                }
+            }
+
+        }
+        if (stack.size() != 0) {
+            return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         int[] a = {1, 2, 3, 0, 0, 0};
         int[] b = {2, 5, 6};
 
     }
+
 
 }

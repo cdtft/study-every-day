@@ -36,4 +36,10 @@ public class SolutionTest {
         int[] b = {2, 5, 6};
         solution.merge2(a, 3, b, 3);
     }
+
+    @Test
+    public void isValid() {
+        assert solution.isValid("]]") == false;
+    }
+
 }
