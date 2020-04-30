@@ -232,4 +232,16 @@ public class Solution {
             return l2;
         }
     }
+
+    public int removeDuplicates(int[] nums) {
+        int preIdx = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[preIdx] != nums[i]) {
+                preIdx++;
+                nums[preIdx] = nums[i];
+            }
+        }
+        return ++preIdx;
+    }
+
 }

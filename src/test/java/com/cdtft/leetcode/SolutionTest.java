@@ -57,4 +57,10 @@ public class SolutionTest {
         printNode(node.next);
         System.out.println(node.val);
     }
+
+    @Test
+    public void removeDuplicates() {
+        int[] num = new int[]{1, 1, 2, 2, 5};
+        System.out.println(solution.removeDuplicates(num));
+    }
 }
