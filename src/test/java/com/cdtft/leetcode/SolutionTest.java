@@ -69,4 +69,15 @@ public class SolutionTest {
         int[] nums = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         System.out.println(solution.bSearch(nums, 0, nums.length, 2));
     }
+
+    @Test
+    public void fib() {
+        System.out.println(solution.fib(5));
+    }
+
+    @Test
+    public void maxSubArray() {
+        int[] array = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        System.out.println(solution.maxSubArray_1(array));
+    }
 }

@@ -259,4 +259,39 @@ public class Solution {
         return idx;
     }
 
+    public int fib(int n) {
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        return fib(n - 1) + fib(n - 2);
+    }
+
+    public static void main(String[] args) {
+
+    }
+
+    public int maxSubArray(int[] nums) {
+        int maxSum = 0;
+        int currentSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            currentSum = Math.max(currentSum + nums[i], nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+            System.out.println(maxSum);
+        }
+        return maxSum;
+    }
+
+    public int maxSubArray_1(int[] nums) {
+        for (int i : nums) {
+            System.out.print(i + " ");
+        }
+        System.out.println("");
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int preMax = maxSubArray_1(Arrays.copyOf(nums, nums.length - 1));
+        int currentMax = Math.max(preMax + nums[nums.length-1], preMax);
+        return Math.max(currentMax, nums[nums.length-1]);
+    }
+
 }
