@@ -32,9 +32,9 @@ public class SolutionTest {
 
     @Test
     public void merge2() {
-        int[] a = {1, 2, 3, 0, 0, 0};
-        int[] b = {2, 5, 6};
-        solution.merge2(a, 3, b, 3);
+        int[] a = {2, 0};
+        int[] b = {1};
+        solution.merge2(a, 1, b, 1);
     }
 
     @Test

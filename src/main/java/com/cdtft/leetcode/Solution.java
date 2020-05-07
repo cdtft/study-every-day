@@ -170,6 +170,9 @@ public class Solution {
                 A[index--] = B[indexB--];
             }
         }
+        while(indexB >= 0) {
+            A[index--] = B[indexB--];
+        }
     }
 
     public int[] distributeCandies(int candies, int num_people) {
