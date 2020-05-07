@@ -80,4 +80,16 @@ public class SolutionTest {
         int[] array = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         System.out.println(solution.maxSubArray_1(array));
     }
+
+    @Test
+    public void maxDepth() {
+        TreeNode root = new TreeNode(3);
+        root.setL(new TreeNode(9));
+        TreeNode node20 = new TreeNode(20);
+        node20.setL(new TreeNode(15));
+        node20.setR(new TreeNode(7));
+        root.setR(node20);
+        System.out.println(solution.maxDepth1(root));
+    }
+
 }

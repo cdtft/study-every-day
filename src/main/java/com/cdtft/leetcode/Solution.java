@@ -1,9 +1,8 @@
 package com.cdtft.leetcode;
 
-import org.w3c.dom.NodeList;
-
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
 
@@ -170,7 +169,7 @@ public class Solution {
                 A[index--] = B[indexB--];
             }
         }
-        while(indexB >= 0) {
+        while (indexB >= 0) {
             A[index--] = B[indexB--];
         }
     }
@@ -269,10 +268,6 @@ public class Solution {
         return fib(n - 1) + fib(n - 2);
     }
 
-    public static void main(String[] args) {
-
-    }
-
     public int maxSubArray(int[] nums) {
         int maxSum = 0;
         int currentSum = 0;
@@ -293,8 +288,53 @@ public class Solution {
             return nums[0];
         }
         int preMax = maxSubArray_1(Arrays.copyOf(nums, nums.length - 1));
-        int currentMax = Math.max(preMax + nums[nums.length-1], preMax);
-        return Math.max(currentMax, nums[nums.length-1]);
+        int currentMax = Math.max(preMax + nums[nums.length - 1], preMax);
+        return Math.max(currentMax, nums[nums.length - 1]);
+    }
+
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.getL() == null && root.getR() == null) {
+            return 1;
+        }
+        return 1 + Math.max(maxDepth(root.getL()), maxDepth(root.getR()));
+    }
+
+    public int maxDepth1(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.getR() == null && root.getL() == null) {
+            return 1;
+        }
+        LinkedList<TreeNode> list = new LinkedList<>();
+        list.offer(root);
+        int level = 0;
+        while (!list.isEmpty()) {
+            int size = list.size();
+            for (int cur = 0; cur < size; cur++) {
+                TreeNode node = list.poll();
+                if (node.getL() != null) {
+                    list.offer(node.getL());
+                }
+                if (node.getR() != null) {
+                    list.offer(node.getR());
+                }
+            }
+            level++;
+        }
+        return level;
+    }
+
+
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.push(1);
+        list.add(2);
+        System.out.println(list.poll());
+        System.out.println("");
     }
 
 }
