@@ -92,4 +92,10 @@ public class SolutionTest {
         System.out.println(solution.maxDepth1(root));
     }
 
+    @Test
+    public void maxProfit() {
+        //[7,1,5,3,6,4]
+        int[] array = new int[]{7, 1, 5, 3, 6, 4};
+        System.out.println(solution.maxProfit(array));
+    }
 }

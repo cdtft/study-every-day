@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Stack;
+import java.util.TreeMap;
 
 /**
  * @author : wangcheng
@@ -326,6 +327,30 @@ public class Solution {
             level++;
         }
         return level;
+    }
+
+    public int maxProfit(int[] prices) {
+        Integer maxProfit = 0;
+        Integer minPrice = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            }
+            if (prices[i] - minPrice > maxProfit) {
+                maxProfit = prices[i] - minPrice;
+            }
+        }
+        return maxProfit;
+    }
+
+    public int maxProfit2(int[] prices) {
+        int maxProfit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i-1]) {
+                maxProfit = maxProfit + prices[i] - prices[i - 1];
+            }
+        }
+        return maxProfit;
     }
 
 
