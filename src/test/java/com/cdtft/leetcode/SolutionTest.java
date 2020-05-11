@@ -98,4 +98,9 @@ public class SolutionTest {
         int[] array = new int[]{7, 1, 5, 3, 6, 4};
         System.out.println(solution.maxProfit(array));
     }
+
+    @Test
+    public void isPalindrome() {
+        System.out.println(solution.isPalindrome("race a car"));
+    }
 }

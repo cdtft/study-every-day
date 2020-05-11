@@ -346,11 +346,37 @@ public class Solution {
     public int maxProfit2(int[] prices) {
         int maxProfit = 0;
         for (int i = 1; i < prices.length; i++) {
-            if (prices[i] > prices[i-1]) {
+            if (prices[i] > prices[i - 1]) {
                 maxProfit = maxProfit + prices[i] - prices[i - 1];
             }
         }
         return maxProfit;
+    }
+
+    public boolean isPalindrome(String s) {
+        char[] chars = s.toLowerCase().toCharArray();
+        int preIdx = 0;
+        int lastIndex = chars.length - 1;
+        while (preIdx < lastIndex) {
+            boolean preIsLetter = chars[preIdx] >= 'a' && chars[preIdx] <= 'z';
+            boolean preIsNum = chars[preIdx] >= '0' && chars[preIdx] <= '9';
+            if (!(preIsLetter || preIsNum)) {
+                preIdx++;
+                continue;
+            }
+            boolean lastIsLetter = chars[lastIndex] >= 'a' && chars[lastIndex] <= 'z';
+            boolean lastIsNum = chars[lastIndex] >= '0' && chars[lastIndex] <= '9';
+            if (!(lastIsLetter || lastIsNum)) {
+                lastIndex--;
+                continue;
+            }
+            if (chars[preIdx] != chars[lastIndex]) {
+                return false;
+            }
+            preIdx++;
+            lastIndex--;
+        }
+        return true;
     }
 
 
