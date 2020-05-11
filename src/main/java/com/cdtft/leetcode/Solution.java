@@ -1,8 +1,10 @@
 package com.cdtft.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import java.util.TreeMap;
@@ -379,6 +381,38 @@ public class Solution {
         return true;
     }
 
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        for (int i : nums) {
+            result ^= nums[i];
+        }
+        return result;
+    }
+
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
+    /**
+     * 摩尔投票
+     *
+     * @param nums
+     * @return
+     */
+    public int majorityElement_1(int[] nums) {
+        int cand = nums[0];
+        int count = 1;
+        for (int i = 1; i < nums.length - 1; i++) {
+            if (cand == nums[i]) {
+                count++;
+            } else if (--count == 0) {
+                cand = nums[i];
+                cand = 1;
+            }
+        }
+        return cand;
+    }
 
     public static void main(String[] args) {
         LinkedList<Integer> list = new LinkedList<>();

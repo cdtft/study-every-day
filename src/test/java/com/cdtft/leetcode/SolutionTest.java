@@ -103,4 +103,10 @@ public class SolutionTest {
     public void isPalindrome() {
         System.out.println(solution.isPalindrome("race a car"));
     }
+
+    @Test
+    public void singleNumber() {
+        int[] nums = new int[]{2, 2, 1};
+        System.out.println(2^2^2);
+    }
 }
