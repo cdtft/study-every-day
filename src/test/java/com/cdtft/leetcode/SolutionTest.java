@@ -115,4 +115,10 @@ public class SolutionTest {
         int[] nums = new int[]{1, 2, 3, 1};
         System.out.println(solution.rob(nums));
     }
+
+    @Test
+    public void removeElements() {
+        ListNode node = new ListNode(1);
+        solution.removeElements(null, 1);
+    }
 }

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.TreeMap;
 
@@ -448,6 +449,27 @@ public class Solution {
             dp1 = temp;
         }
         return dp1;
+    }
+
+    public ListNode removeElements(ListNode head, int val) {
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+        if (head == null) {
+            return head;
+        }
+        ListNode index = head;
+        while (!Objects.isNull(index.next)) {
+            if (index.next.val == val) {
+                index.next = index.next.next;
+                continue;
+            }
+            index = index.next;
+            if (index == null) {
+                return head;
+            }
+        }
+        return head;
     }
 
 }
