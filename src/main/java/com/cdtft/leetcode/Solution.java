@@ -430,4 +430,13 @@ public class Solution {
         }).start();
     }
 
+    public int reverseBits(int n) {
+        int i = 0;
+        for (int j = 0; j < 32; j++) {
+            i = (i << 1) + (n & 1);
+            n = n >> 1;
+        }
+        return i;
+    }
+
 }
