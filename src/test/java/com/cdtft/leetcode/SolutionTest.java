@@ -107,7 +107,7 @@ public class SolutionTest {
     @Test
     public void singleNumber() {
         int[] nums = new int[]{2, 2, 1};
-        System.out.println(2^2^2);
+        System.out.println(2 ^ 2 ^ 2);
     }
 
     @Test
@@ -120,5 +120,10 @@ public class SolutionTest {
     public void removeElements() {
         ListNode node = new ListNode(1);
         solution.removeElements(null, 1);
+    }
+
+    @Test
+    public void containsNearbyDuplicate() {
+        solution.containsNearbyDuplicate(new int[]{1, 2, 3, 1, 2, 3}, 2);
     }
 }
