@@ -1,7 +1,9 @@
 package com.cdtft.leetcode;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -414,12 +416,18 @@ public class Solution {
         return cand;
     }
 
+    private static final ThreadLocal<SimpleDateFormat> formatter = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyyMMdd HHmm");
+        }
+    };
+
     public static void main(String[] args) {
-        LinkedList<Integer> list = new LinkedList<>();
-        list.push(1);
-        list.add(2);
-        System.out.println(list.poll());
-        System.out.println("");
+        new Thread(() -> {
+            SimpleDateFormat format = formatter.get();
+            System.out.println(format.format(new Date()));
+        }).start();
     }
 
 }
