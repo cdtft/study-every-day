@@ -109,4 +109,10 @@ public class SolutionTest {
         int[] nums = new int[]{2, 2, 1};
         System.out.println(2^2^2);
     }
+
+    @Test
+    public void rob() {
+        int[] nums = new int[]{1, 2, 3, 1};
+        System.out.println(solution.rob(nums));
+    }
 }

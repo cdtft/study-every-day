@@ -439,4 +439,15 @@ public class Solution {
         return i;
     }
 
+    public int rob(int[] nums) {
+        int dp0 = 0;
+        int dp1 = 0;
+        for (int i = 2; i < nums.length + 2; i++) {
+            int temp = Math.max(dp0 + nums[i - 2], dp1);
+            dp0 = dp1;
+            dp1 = temp;
+        }
+        return dp1;
+    }
+
 }
