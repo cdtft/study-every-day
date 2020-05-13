@@ -1,6 +1,10 @@
 package com.cdtft.leetcode;
 
+import javax.xml.soap.Node;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -424,13 +428,6 @@ public class Solution {
         }
     };
 
-    public static void main(String[] args) {
-        new Thread(() -> {
-            SimpleDateFormat format = formatter.get();
-            System.out.println(format.format(new Date()));
-        }).start();
-    }
-
     public int reverseBits(int n) {
         int i = 0;
         for (int j = 0; j < 32; j++) {
@@ -482,6 +479,27 @@ public class Solution {
             map.put(nums[i], i);
         }
         return false;
+    }
+
+    public TreeNode invertTree(TreeNode root) {
+        LinkedList<TreeNode> list = new LinkedList<>();
+        list.offer(root);
+        while (!list.isEmpty()) {
+            int size = list.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = list.poll();
+                if (node.getL() != null) {
+                    list.offer(node.getL());
+                }
+                if (node.getR() != null) {
+                    list.offer(node.getR());
+                }
+                TreeNode temp = node.getL();
+                node.setL(node.getR());
+                node.setR(temp);
+            }
+        }
+        return root;
     }
 
 }
