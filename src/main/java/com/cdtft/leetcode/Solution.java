@@ -1,11 +1,22 @@
 package com.cdtft.leetcode;
 
-import org.w3c.dom.NodeList;
-
+import javax.xml.soap.Node;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
 
 /**
  * @author : wangcheng
@@ -170,6 +181,9 @@ public class Solution {
                 A[index--] = B[indexB--];
             }
         }
+        while (indexB >= 0) {
+            A[index--] = B[indexB--];
+        }
     }
 
     public int[] distributeCandies(int candies, int num_people) {
@@ -266,10 +280,6 @@ public class Solution {
         return fib(n - 1) + fib(n - 2);
     }
 
-    public static void main(String[] args) {
-
-    }
-
     public int maxSubArray(int[] nums) {
         int maxSum = 0;
         int currentSum = 0;
@@ -286,14 +296,263 @@ public class Solution {
             System.out.print(i + " ");
         }
         System.out.println("");
-        int length = nums.length;
-        if (length == 1) {
+        if (nums.length == 1) {
             return nums[0];
         }
-        int preMax = maxSubArray_1(Arrays.copyOf(nums, length - 1));
-        int currentMax_1 = Math.max(preMax + nums[length - 1], preMax);
-        int currentMax = Math.max(currentMax_1, nums[length-1]);
-        return currentMax;
+        int preMax = maxSubArray_1(Arrays.copyOf(nums, nums.length - 1));
+        int currentMax = Math.max(preMax + nums[nums.length - 1], preMax);
+        return Math.max(currentMax, nums[nums.length - 1]);
+    }
+
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.getL() == null && root.getR() == null) {
+            return 1;
+        }
+        return 1 + Math.max(maxDepth(root.getL()), maxDepth(root.getR()));
+    }
+
+    public int maxDepth1(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.getR() == null && root.getL() == null) {
+            return 1;
+        }
+        LinkedList<TreeNode> list = new LinkedList<>();
+        list.offer(root);
+        int level = 0;
+        while (!list.isEmpty()) {
+            int size = list.size();
+            for (int cur = 0; cur < size; cur++) {
+                TreeNode node = list.poll();
+                if (node.getL() != null) {
+                    list.offer(node.getL());
+                }
+                if (node.getR() != null) {
+                    list.offer(node.getR());
+                }
+            }
+            level++;
+        }
+        return level;
+    }
+
+    public int maxProfit(int[] prices) {
+        Integer maxProfit = 0;
+        Integer minPrice = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            }
+            if (prices[i] - minPrice > maxProfit) {
+                maxProfit = prices[i] - minPrice;
+            }
+        }
+        return maxProfit;
+    }
+
+    public int maxProfit2(int[] prices) {
+        int maxProfit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                maxProfit = maxProfit + prices[i] - prices[i - 1];
+            }
+        }
+        return maxProfit;
+    }
+
+    public boolean isPalindrome(String s) {
+        char[] chars = s.toLowerCase().toCharArray();
+        int preIdx = 0;
+        int lastIndex = chars.length - 1;
+        while (preIdx < lastIndex) {
+            boolean preIsLetter = chars[preIdx] >= 'a' && chars[preIdx] <= 'z';
+            boolean preIsNum = chars[preIdx] >= '0' && chars[preIdx] <= '9';
+            if (!(preIsLetter || preIsNum)) {
+                preIdx++;
+                continue;
+            }
+            boolean lastIsLetter = chars[lastIndex] >= 'a' && chars[lastIndex] <= 'z';
+            boolean lastIsNum = chars[lastIndex] >= '0' && chars[lastIndex] <= '9';
+            if (!(lastIsLetter || lastIsNum)) {
+                lastIndex--;
+                continue;
+            }
+            if (chars[preIdx] != chars[lastIndex]) {
+                return false;
+            }
+            preIdx++;
+            lastIndex--;
+        }
+        return true;
+    }
+
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        for (int i : nums) {
+            result ^= nums[i];
+        }
+        return result;
+    }
+
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
+    /**
+     * 摩尔投票
+     *
+     * @param nums
+     * @return
+     */
+    public int majorityElement_1(int[] nums) {
+        int cand = nums[0];
+        int count = 1;
+        for (int i = 1; i < nums.length - 1; i++) {
+            if (cand == nums[i]) {
+                count++;
+            } else if (--count == 0) {
+                cand = nums[i];
+                cand = 1;
+            }
+        }
+        return cand;
+    }
+
+    private static final ThreadLocal<SimpleDateFormat> formatter = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyyMMdd HHmm");
+        }
+    };
+
+    public int reverseBits(int n) {
+        int i = 0;
+        for (int j = 0; j < 32; j++) {
+            i = (i << 1) + (n & 1);
+            n = n >> 1;
+        }
+        return i;
+    }
+
+    public int rob(int[] nums) {
+        int dp0 = 0;
+        int dp1 = 0;
+        for (int i = 2; i < nums.length + 2; i++) {
+            int temp = Math.max(dp0 + nums[i - 2], dp1);
+            dp0 = dp1;
+            dp1 = temp;
+        }
+        return dp1;
+    }
+
+    public ListNode removeElements(ListNode head, int val) {
+        while (head != null && head.val == val) {
+            head = head.next;
+        }
+        if (head == null) {
+            return head;
+        }
+        ListNode index = head;
+        while (!Objects.isNull(index.next)) {
+            if (index.next.val == val) {
+                index.next = index.next.next;
+                continue;
+            }
+            index = index.next;
+            if (index == null) {
+                return head;
+            }
+        }
+        return head;
+    }
+
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            Integer index = map.get(nums[i]);
+            if (index != null && i - index <= k) {
+                return true;
+            }
+            map.put(nums[i], i);
+        }
+        return false;
+    }
+
+    public TreeNode invertTree(TreeNode root) {
+        LinkedList<TreeNode> list = new LinkedList<>();
+        list.offer(root);
+        while (!list.isEmpty()) {
+            int size = list.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = list.poll();
+                if (node.getL() != null) {
+                    list.offer(node.getL());
+                }
+                if (node.getR() != null) {
+                    list.offer(node.getR());
+                }
+                TreeNode temp = node.getL();
+                node.setL(node.getR());
+                node.setR(temp);
+            }
+        }
+        return root;
+    }
+
+    public boolean isUgly(int num) {
+        if (num == 0) {
+            return false;
+        }
+        while (num % 2 == 0) {
+            num = num / 2;
+        }
+        while (num % 3 == 0) {
+            num = num / 3;
+        }
+        while (num % 5 == 0) {
+            num = num % 5;
+        }
+        if (num == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public void moveZeroes(int[] nums) {
+        int preIndex = 0;
+        int sufIndex = 0;
+        while (preIndex < nums.length) {
+            if (nums[preIndex] != 0) {
+                nums[sufIndex] = nums[preIndex];
+                nums[preIndex] = 0;
+                sufIndex++;
+            }
+            preIndex++;
+        }
+    }
+
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> list = new HashSet<>();
+        for (Integer i : nums1) {
+            map.put(i, null);
+        }
+        for (Integer i : nums2) {
+            if (map.containsKey(i)) {
+                list.add(i);
+            }
+        }
+        int[] result = new int[list.size()];
+        int i = 0;
+        for (int val : list) {
+            result[i++] = val;
+        }
+        return result;
     }
 
 }
