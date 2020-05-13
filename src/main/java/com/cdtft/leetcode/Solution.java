@@ -286,12 +286,14 @@ public class Solution {
             System.out.print(i + " ");
         }
         System.out.println("");
-        if (nums.length == 1) {
+        int length = nums.length;
+        if (length == 1) {
             return nums[0];
         }
-        int preMax = maxSubArray_1(Arrays.copyOf(nums, nums.length - 1));
-        int currentMax = Math.max(preMax + nums[nums.length-1], preMax);
-        return Math.max(currentMax, nums[nums.length-1]);
+        int preMax = maxSubArray_1(Arrays.copyOf(nums, length - 1));
+        int currentMax_1 = Math.max(preMax + nums[length - 1], preMax);
+        int currentMax = Math.max(currentMax_1, nums[length-1]);
+        return currentMax;
     }
 
 }
