@@ -521,4 +521,17 @@ public class Solution {
         return false;
     }
 
+    public void moveZeroes(int[] nums) {
+        int preIndex = 0;
+        int sufIndex = 0;
+        while (preIndex < nums.length) {
+            if (nums[preIndex] != 0) {
+                nums[sufIndex] = nums[preIndex];
+                nums[preIndex] = 0;
+                sufIndex++;
+            }
+            preIndex++;
+        }
+    }
+
 }
