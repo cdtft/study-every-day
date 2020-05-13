@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
 
@@ -506,7 +508,7 @@ public class Solution {
         if (num == 0) {
             return false;
         }
-        while(num % 2 == 0) {
+        while (num % 2 == 0) {
             num = num / 2;
         }
         while (num % 3 == 0) {
@@ -532,6 +534,25 @@ public class Solution {
             }
             preIndex++;
         }
+    }
+
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Set<Integer> list = new HashSet<>();
+        for (Integer i : nums1) {
+            map.put(i, null);
+        }
+        for (Integer i : nums2) {
+            if (map.containsKey(i)) {
+                list.add(i);
+            }
+        }
+        int[] result = new int[list.size()];
+        int i = 0;
+        for (int val : list) {
+            result[i++] = val;
+        }
+        return result;
     }
 
 }
