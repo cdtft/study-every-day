@@ -1,5 +1,7 @@
 package com.cdtft.leetcode;
 
+import org.w3c.dom.NodeList;
+
 import javax.xml.soap.Node;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -553,6 +555,70 @@ public class Solution {
             result[i++] = val;
         }
         return result;
+    }
+
+    private boolean flag = false;
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        LinkedList<Integer> stack1 = new LinkedList<>();
+        LinkedList<Integer> stack2 = new LinkedList<>();
+        while (l1 != null) {
+            stack1.offer(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            stack2.offer(l2.val);
+            l2 = l2.next;
+        }
+        LinkedList<Integer> result = new LinkedList<>();
+        while (!stack1.isEmpty() && !stack2.isEmpty()) {
+            Integer num1 = stack1.poll();
+            Integer num2 = stack2.poll();
+            Integer sum = num1 + num2;
+            offerResult(sum, result);
+        }
+        pollList(stack1, result);
+        pollList(stack2, result);
+        ListNode node = null;
+        while (!result.isEmpty()) {
+            if (node == null) {
+                node = new ListNode(result.poll());
+            } else {
+                ListNode temp = node;
+                while (temp.next != null) {
+                    temp = temp.next;
+                }
+                temp.next = new ListNode(result.poll());
+            }
+        }
+        if (flag) {
+            ListNode temp = node;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = new ListNode(1);
+        }
+        return node;
+    }
+
+    private void pollList(LinkedList<Integer> list, LinkedList<Integer> result) {
+        while (!list.isEmpty()) {
+            Integer sum = result.poll();
+            offerResult(sum, result);
+        }
+    }
+
+    private void offerResult(Integer sum, LinkedList<Integer> result) {
+        if (flag) {
+            sum += 1;
+            flag = false;
+        }
+        if (sum > 9) {
+            result.offer(sum % 10);
+            flag = true;
+        } else {
+            result.offer(sum);
+        }
     }
 
 }

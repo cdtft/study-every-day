@@ -126,4 +126,11 @@ public class SolutionTest {
     public void containsNearbyDuplicate() {
         solution.containsNearbyDuplicate(new int[]{1, 2, 3, 1, 2, 3}, 2);
     }
+
+    @Test
+    public void addTwoNumbers() {
+        ListNode node1 = new ListNode(0);
+        ListNode node2 = new ListNode(7, new ListNode(3));
+        solution.addTwoNumbers(node1, node2);
+    }
 }
