@@ -614,4 +614,22 @@ public class Solution {
         return index;
     }
 
+    public int findContentChildren(int[] g, int[] s) {
+        quickSort(g, 0, g.length);
+        quickSort(s, 0, s.length);
+        int index = 0;
+        int total = 0;
+        for (int i = 0; i < g.length; i++) {
+            while(index < s.length) {
+                if (g[i] <= s[index]) {
+                    total++;
+                    index++;
+                    break;
+                }
+                index++;
+            }
+        }
+        return total;
+    }
+
 }
