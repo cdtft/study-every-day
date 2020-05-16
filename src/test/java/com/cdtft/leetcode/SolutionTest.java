@@ -133,4 +133,13 @@ public class SolutionTest {
         ListNode node2 = new ListNode(7, new ListNode(3));
         solution.addTwoNumbers(node1, node2);
     }
+
+    @Test
+    public void quickSort() {
+        int[] array = new int[]{5, 10, 1, 4};
+        solution.quickSort(array, 0, array.length - 1);
+        for (int value : array) {
+            System.out.println(value);
+        }
+    }
 }
