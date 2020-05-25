@@ -1,24 +1,14 @@
 package com.cdtft.leetcode;
 
-import org.w3c.dom.NodeList;
-
-import javax.xml.soap.Node;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
-import java.util.TreeMap;
 
 /**
  * @author : wangcheng
@@ -620,7 +610,7 @@ public class Solution {
         int index = 0;
         int total = 0;
         for (int i = 0; i < g.length; i++) {
-            while(index < s.length) {
+            while (index < s.length) {
                 if (g[i] <= s[index]) {
                     total++;
                     index++;
