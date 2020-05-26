@@ -6,13 +6,15 @@ package com.cdtft.leetcode;
  */
 public class TreeNode {
 
-    private int val;
+    public int val;
 
-    private TreeNode l;
+    public TreeNode left;
 
-    private TreeNode r;
+    public TreeNode right;
 
-    TreeNode(int x) { val = x; }
+    TreeNode(int x) {
+        val = x;
+    }
 
     public int getVal() {
         return val;
@@ -22,19 +24,19 @@ public class TreeNode {
         this.val = val;
     }
 
-    public TreeNode getL() {
-        return l;
+    public TreeNode getLeft() {
+        return left;
     }
 
-    public void setL(TreeNode l) {
-        this.l = l;
+    public void setLeft(TreeNode left) {
+        this.left = left;
     }
 
-    public TreeNode getR() {
-        return r;
+    public TreeNode getRight() {
+        return right;
     }
 
-    public void setR(TreeNode r) {
-        this.r = r;
+    public void setRight(TreeNode right) {
+        this.right = right;
     }
 }

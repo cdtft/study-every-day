@@ -84,11 +84,11 @@ public class SolutionTest {
     @Test
     public void maxDepth() {
         TreeNode root = new TreeNode(3);
-        root.setL(new TreeNode(9));
+        root.setLeft(new TreeNode(9));
         TreeNode node20 = new TreeNode(20);
-        node20.setL(new TreeNode(15));
-        node20.setR(new TreeNode(7));
-        root.setR(node20);
+        node20.setLeft(new TreeNode(15));
+        node20.setRight(new TreeNode(7));
+        root.setRight(node20);
         System.out.println(solution.maxDepth1(root));
     }
 

@@ -260,17 +260,17 @@ public class Solution {
         if (root == null) {
             return 0;
         }
-        if (root.getL() == null && root.getR() == null) {
+        if (root.getLeft() == null && root.getRight() == null) {
             return 1;
         }
-        return 1 + Math.max(maxDepth(root.getL()), maxDepth(root.getR()));
+        return 1 + Math.max(maxDepth(root.getLeft()), maxDepth(root.getRight()));
     }
 
     public int maxDepth1(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        if (root.getR() == null && root.getL() == null) {
+        if (root.getRight() == null && root.getLeft() == null) {
             return 1;
         }
         LinkedList<TreeNode> list = new LinkedList<>();
@@ -280,11 +280,11 @@ public class Solution {
             int size = list.size();
             for (int cur = 0; cur < size; cur++) {
                 TreeNode node = list.poll();
-                if (node.getL() != null) {
-                    list.offer(node.getL());
+                if (node.getLeft() != null) {
+                    list.offer(node.getLeft());
                 }
-                if (node.getR() != null) {
-                    list.offer(node.getR());
+                if (node.getRight() != null) {
+                    list.offer(node.getRight());
                 }
             }
             level++;
@@ -442,15 +442,15 @@ public class Solution {
             int size = list.size();
             for (int i = 0; i < size; i++) {
                 TreeNode node = list.poll();
-                if (node.getL() != null) {
-                    list.offer(node.getL());
+                if (node.getLeft() != null) {
+                    list.offer(node.getLeft());
                 }
-                if (node.getR() != null) {
-                    list.offer(node.getR());
+                if (node.getRight() != null) {
+                    list.offer(node.getRight());
                 }
-                TreeNode temp = node.getL();
-                node.setL(node.getR());
-                node.setR(temp);
+                TreeNode temp = node.getLeft();
+                node.setLeft(node.getRight());
+                node.setRight(temp);
             }
         }
         return root;
