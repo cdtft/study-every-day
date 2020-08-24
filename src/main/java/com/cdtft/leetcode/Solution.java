@@ -622,4 +622,32 @@ public class Solution {
         return total;
     }
 
+    public TreeNode recoverFromPreorder(String S) {
+        if (S == null || S.length() == 0) {
+            return null;
+        }
+        char[] chars = S.toCharArray();
+        LinkedList<TreeNode> nodeList = new LinkedList<>();
+        TreeNode root = null;
+        for (char c : chars) {
+            if (nodeList.isEmpty()) {
+                root = new TreeNode(c);
+                nodeList.offer(root);
+            } else {
+
+            }
+        }
+        return null;
+    }
+
+    private boolean isNum(char value) {
+        if (value >= '0' && value <= '9') {
+            return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+    }
+
 }
