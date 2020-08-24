@@ -25,12 +25,11 @@ public class PrintABC {
 
     public void print() {
         new Thread(new ThreadPrintA(), "A-1").start();
-        //new Thread(new ThreadPrintA(), "A-2").start();
+        new Thread(new ThreadPrintA(), "A-2").start();
         new Thread(new ThreadPrintB(), "B-1").start();
-        // Thread(new ThreadPrintB(), "B-2").start();
+        new Thread(new ThreadPrintB(), "B-2").start();
         new Thread(new ThreadPrintC(), "C-1").start();
-        //new Thread(new ThreadPrintC(), "C-2").start();
-
+        new Thread(new ThreadPrintC(), "C-2").start();
     }
 
     class ThreadPrintA implements Runnable {
