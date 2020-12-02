@@ -1,4 +1,4 @@
-package com.cdtft.lock.product;
+package com.cdtft.concurrency.lock.product;
 
 import com.google.common.collect.Lists;
 

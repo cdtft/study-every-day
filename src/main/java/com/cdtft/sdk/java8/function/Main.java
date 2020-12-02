@@ -1,4 +1,4 @@
-package com.cdtft.function;
+package com.cdtft.sdk.java8.function;
 
 /**
  * @author : wangcheng

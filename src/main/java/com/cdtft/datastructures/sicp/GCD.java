@@ -1,4 +1,4 @@
-package com.cdtft.sicp;
+package com.cdtft.datastructures.sicp;
 
 /**
  * 求最大公约数

@@ -1,4 +1,4 @@
-package com.cdtft.java8;
+package com.cdtft.sdk.java8;
 
 /**
  * @author : wangcheng
