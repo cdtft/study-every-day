@@ -3,21 +3,21 @@ package com.cdtft.datastructures.unionfind;
 import java.util.Arrays;
 
 /**
- * union-find 快速查找
+ * union find 快速连接
  *
  * @author : 努力学习JAVA的wangcheng
- * @date : 2020年12月02日 15:21
+ * @date : 2020年12月03日 11:25
  */
-public class UnionQuickFind extends AbstractUnionFind {
+public class QuickUnionFind extends AbstractUnionFind {
 
     private int count;
 
-    //下标代表触点，值为连通分量的索引
+    //使用数组表示森林，数组下标和数组中的值相等的时候为根节点
     private final int[] id;
 
-    public UnionQuickFind(int n) {
+    public QuickUnionFind(int n) {
         this.count = n;
-        id = new int[n];
+        this.id = new int[n];
         for (int i = 0; i < n; i++) {
             id[i] = i;
         }
@@ -25,22 +25,21 @@ public class UnionQuickFind extends AbstractUnionFind {
 
     @Override
     public void union(int q, int p) {
-        if (connected(q, p)) {
+        int qRoot = find(q);
+        int pRoot = find(p);
+        if (qRoot == pRoot) {
             return;
         }
-        int pId = id[p];
-        int qId = id[q];
-        for (int i = 0; i < id.length; i++) {
-            if (id[i] == pId) {
-                id[i] = qId;
-            }
-        }
+        id[qRoot] = pRoot;
         count--;
     }
 
     @Override
     public int find(int index) {
-        return id[index];
+        while(id[index] != index) {
+            index = id[index];
+        }
+        return index;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class UnionQuickFind extends AbstractUnionFind {
     }
 
     public static void main(String[] args) {
-        UnionQuickFind unionFind = new UnionQuickFind(5);
+        QuickUnionFind unionFind = new QuickUnionFind(5);
         unionFind.union(0, 4);
         unionFind.union(4, 2);
         System.out.println(unionFind.connected(0, 2));
