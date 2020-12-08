@@ -30,10 +30,17 @@ public class QuickUnionFind extends AbstractUnionFind {
         if (qRoot == pRoot) {
             return;
         }
+        //合并两棵树的根节点
         id[qRoot] = pRoot;
         count--;
     }
 
+    /**
+     * 找到树的根节点
+     *
+     * @param index
+     * @return
+     */
     @Override
     public int find(int index) {
         while(id[index] != index) {
