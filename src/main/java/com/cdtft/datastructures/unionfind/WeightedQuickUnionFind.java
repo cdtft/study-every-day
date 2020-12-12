@@ -3,24 +3,27 @@ package com.cdtft.datastructures.unionfind;
 import java.util.Arrays;
 
 /**
- * union-find 快速查找
+ * 加权归并树
  *
  * @author : 努力学习JAVA的wangcheng
- * @date : 2020年12月02日 15:21
+ * @date : 2020年12月11日 16:51
  */
-public class UnionQuickFind extends AbstractUnionFind {
+public class WeightedQuickUnionFind extends AbstractTreeUnionFind {
+
+    private int[] id;
+
+    private int[] sz;
 
     private int count;
 
-    //下标代表触点，值为连通分量的索引
-    private final int[] id;
-
-    public UnionQuickFind(int n) {
-        this.count = n;
-        id = new int[n];
+    public WeightedQuickUnionFind(int n) {
+        this.id = new int[n];
+        this.sz = new int[n];
         for (int i = 0; i < n; i++) {
             id[i] = i;
+            sz[i] = 1;
         }
+        this.count = n;
     }
 
     @Override
@@ -30,22 +33,19 @@ public class UnionQuickFind extends AbstractUnionFind {
 
     @Override
     public void union(int q, int p) {
-        if (connected(q, p)) {
+        int qRootIdx = id[q];
+        int pRootIdx = id[p];
+        if (qRootIdx == pRootIdx) {
             return;
         }
-        int pId = id[p];
-        int qId = id[q];
-        for (int i = 0; i < id.length; i++) {
-            if (id[i] == pId) {
-                id[i] = qId;
-            }
+        if (sz[q] < sz[p]) {
+            id[q] = pRootIdx;
+            sz[p] = sz[p] + 1;
+        } else {
+            id[p] = qRootIdx;
+            sz[q] = sz[q] + 1;
         }
         count--;
-    }
-
-    @Override
-    public int find(int index) {
-        return id[index];
     }
 
     @Override
@@ -54,12 +54,11 @@ public class UnionQuickFind extends AbstractUnionFind {
     }
 
     public static void main(String[] args) {
-        UnionQuickFind unionFind = new UnionQuickFind(5);
+        WeightedQuickUnionFind unionFind = new WeightedQuickUnionFind(5);
         unionFind.union(0, 4);
         unionFind.union(4, 2);
         System.out.println(unionFind.connected(0, 2));
         System.out.println(unionFind.count());
         System.out.println(Arrays.toString(unionFind.id));
     }
-
 }

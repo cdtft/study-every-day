@@ -6,6 +6,8 @@ package com.cdtft.datastructures.unionfind;
  */
 public interface UnionFind {
 
+    int[] id();
+
     /**
      * 连接连个触点
      *

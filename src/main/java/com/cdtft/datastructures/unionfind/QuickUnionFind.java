@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author : 努力学习JAVA的wangcheng
  * @date : 2020年12月03日 11:25
  */
-public class QuickUnionFind extends AbstractUnionFind {
+public class QuickUnionFind extends AbstractTreeUnionFind {
 
     private int count;
 
@@ -24,6 +24,11 @@ public class QuickUnionFind extends AbstractUnionFind {
     }
 
     @Override
+    public int[] id() {
+        return id;
+    }
+
+    @Override
     public void union(int q, int p) {
         int qRoot = find(q);
         int pRoot = find(p);
@@ -33,20 +38,6 @@ public class QuickUnionFind extends AbstractUnionFind {
         //合并两棵树的根节点
         id[qRoot] = pRoot;
         count--;
-    }
-
-    /**
-     * 找到树的根节点
-     *
-     * @param index
-     * @return
-     */
-    @Override
-    public int find(int index) {
-        while(id[index] != index) {
-            index = id[index];
-        }
-        return index;
     }
 
     @Override
