@@ -1,5 +1,7 @@
 package com.cdtft.datastructures.sort;
 
+import java.util.Random;
+
 /**
  * 选择排序
  *
@@ -23,7 +25,11 @@ public class Selection extends AbstractSort {
     }
 
     public static void main(String[] args) {
-        Integer[] test = new Integer[]{5, 2, 4, 6, 1};
+        Random random = new Random();
+        Integer[] test = new Integer[5];
+        for (int i = 0; i < 5; i++) {
+            test[i] = random.nextInt();
+        }
         Selection selection = new Selection();
         selection.show(test);
         selection.sort(test);
