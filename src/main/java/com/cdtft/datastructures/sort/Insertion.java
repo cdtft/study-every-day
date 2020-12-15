@@ -1,24 +1,22 @@
 package com.cdtft.datastructures.sort;
 
 /**
- * 选择排序
+ * 插入排序
  *
  * @author : 努力学习JAVA的wangcheng
- * @date : 2020年12月15日 10:24
+ * @date : 2020年12月15日 14:30
  */
-public class Selection extends AbstractSort {
+public class Insertion extends AbstractSort {
 
     @Override
     public void sort(Comparable[] a) {
         int N = a.length;
-        for (int i = 0; i < N - 1; i++) {
-            int minIdx = i;
-            for (int j = i + 1; j < N; j++) {
-                if (less(a[j], a[minIdx])) {
-                    minIdx = j;
+        for (int i = 1; i < N; i++) {
+            for (int j = i; j > 0; j++) {
+                if (less(a[j], a[j - 1])) {
+                    exchange(a, j, j - 1);
                 }
             }
-            exchange(a, i, minIdx);
         }
     }
 
@@ -30,4 +28,5 @@ public class Selection extends AbstractSort {
         System.out.println(selection.isSorted(test));
         selection.show(test);
     }
+
 }
