@@ -11,30 +11,6 @@ import java.util.Random;
  */
 public class Shell extends AbstractSort {
 
-//    @Override
-//    public void sort(Comparable[] a) {
-//        int N = a.length;
-////        int h = 1;
-////        while (h < N /3) {
-////            h = 3 * h + 1;
-////        }
-//        int h = N / 2;
-//        while (h >= 1) {
-//            System.out.println("cap:" + h);
-//            for (int i = h; i < N; i++) {
-//                //对h数组从左到右进行插入排序
-//                for (int j = i; j >= h; j = j - h) {
-//                    if (less(a[j], a[j - h])) {
-//                        System.out.println("交换下标 " + j + ", " + (j - h));
-//                        exchange(a, j, j - h);
-//                        System.out.println(Arrays.toString(a));
-//                    }
-//                }
-//            }
-//            h = h / 2;
-//        }
-//    }
-
     @Override
     public void sort(Comparable[] a) {
         int N = a.length;
@@ -61,7 +37,7 @@ public class Shell extends AbstractSort {
         Random random = new Random();
         Integer[] testArray = new Integer[5];
         for (int i = 0; i < 5; i++) {
-            testArray[4 - i] = i;
+            testArray[i] = random.nextInt();
         }
 
         shell.sort(testArray);

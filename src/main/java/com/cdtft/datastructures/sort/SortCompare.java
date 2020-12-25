@@ -27,6 +27,10 @@ public class SortCompare {
                 Shell shell = new Shell();
                 shell.sort(a);
                 break;
+            case "merge":
+                Merge merge = new Merge();
+                merge.sort(a);
+                break;
 
         }
         return stopwatch.elapsed(TimeUnit.MILLISECONDS);
@@ -46,8 +50,9 @@ public class SortCompare {
     }
 
     public static void main(String[] args) {
-        System.out.println("insertion sort: 100times " + timeRandomInput("insertion", 100000, 1));
-        System.out.println("selection sort: 100times " + timeRandomInput("selection", 100000, 1));
-        System.out.println("shell sort: 100times" + timeRandomInput("shell", 100000, 1));
+        System.out.println("insertion sort: 100times " + timeRandomInput("insertion", 10000, 1));
+        System.out.println("selection sort: 100times " + timeRandomInput("selection", 10000, 1));
+        System.out.println("shell sort: 100times" + timeRandomInput("shell", 10000, 1));
+        System.out.println("merge sort: 100times" + timeRandomInput("merge", 10000, 1));
     }
 }
