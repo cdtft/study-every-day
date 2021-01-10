@@ -12,7 +12,9 @@ public class TreeNode {
 
     public TreeNode right;
 
-    TreeNode(int x) { val = x; }
+    TreeNode(int x) {
+        val = x;
+    }
 
     TreeNode(int x, TreeNode left, TreeNode right) {
         this.val = x;

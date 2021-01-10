@@ -1,4 +1,4 @@
-package com.cdtft.lock.readandwrite;
+package com.cdtft.concurrency.lock.readandwrite;
 
 import java.util.HashMap;
 import java.util.concurrent.locks.Lock;

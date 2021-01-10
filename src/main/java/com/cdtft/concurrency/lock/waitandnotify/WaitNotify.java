@@ -1,6 +1,5 @@
-package com.cdtft.lock.waitandnotify;
+package com.cdtft.concurrency.lock.waitandnotify;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**

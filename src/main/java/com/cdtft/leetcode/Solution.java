@@ -1,12 +1,10 @@
 package com.cdtft.leetcode;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -612,7 +610,7 @@ public class Solution {
         int index = 0;
         int total = 0;
         for (int i = 0; i < g.length; i++) {
-            while(index < s.length) {
+            while (index < s.length) {
                 if (g[i] <= s[index]) {
                     total++;
                     index++;
@@ -624,38 +622,32 @@ public class Solution {
         return total;
     }
 
-    List<Integer> list = new ArrayList<> ();
-    TreeNode preNode = null;
-    int max = 0, count = 0;
-
-    public int[] findMode(TreeNode root) {
-        helper(root);
-        int[] res = new int[list.size()];
-        for (int i=0; i<res.length; i++) {
-            res[i] = list.get(i);
+    public TreeNode recoverFromPreorder(String S) {
+        if (S == null || S.length() == 0) {
+            return null;
         }
-        return res;
+        char[] chars = S.toCharArray();
+        LinkedList<TreeNode> nodeList = new LinkedList<>();
+        TreeNode root = null;
+        for (char c : chars) {
+            if (nodeList.isEmpty()) {
+                root = new TreeNode(c);
+                nodeList.offer(root);
+            } else {
+
+            }
+        }
+        return null;
     }
 
-    private void helper (TreeNode root) {
-        if (root == null) return;
-        helper(root.left);
-
-        if (preNode != null && root.val == preNode.val) {
-            count++;
-        } else {
-            count = 1;
+    private boolean isNum(char value) {
+        if (value >= '0' && value <= '9') {
+            return true;
         }
+        return false;
+    }
 
-        if (count > max) {
-            list.clear();
-            list.add(root.val);
-            max = count;
-        } else if (max == count) {
-            list.add(root.val);
-        }
-        preNode = root;
-        helper(root.right);
+    public static void main(String[] args) {
     }
 
 }

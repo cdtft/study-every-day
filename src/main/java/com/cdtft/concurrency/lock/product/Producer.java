@@ -1,12 +1,12 @@
-package com.cdtft.lock.product;
+package com.cdtft.concurrency.lock.product;
 
 import java.util.List;
 
 /**
  * @author : wangcheng
- * @date : 2020年03月31日 17:19
+ * @date : 2020年03月31日 17:20
  */
-public class Consumer implements Runnable {
+public class Producer implements Runnable {
 
     private List<Integer> container;
 
@@ -14,7 +14,7 @@ public class Consumer implements Runnable {
 
     private final Object consumerLock;
 
-    public Consumer(List<Integer> container, Object producerLock, Object consumerLock) {
+    public Producer(List<Integer> container, Object producerLock, Object consumerLock) {
         this.container = container;
         this.producerLock = producerLock;
         this.consumerLock = consumerLock;
@@ -23,17 +23,16 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
         while (true) {
-            synchronized (consumerLock) {
-                if (container.size() == 0) {
+            synchronized (producerLock) {
+                if (container.size() == 10) {
                     try {
-                        consumerLock.wait();
+                        producerLock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                container.remove(container.size() - 1);
-                System.out.println(Thread.currentThread().getId() + "当前容器size" + container.size());
-                producerLock.notify();
+                container.add(1);
+                consumerLock.notify();
             }
         }
     }

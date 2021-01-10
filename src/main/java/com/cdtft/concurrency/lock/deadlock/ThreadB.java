@@ -1,4 +1,4 @@
-package com.cdtft.lock.deadlock;
+package com.cdtft.concurrency.lock.deadlock;
 
 import java.util.concurrent.locks.ReentrantLock;
 
