@@ -1,15 +1,8 @@
 package com.cdtft.leetcode;
 
-import org.w3c.dom.NodeList;
-
-import javax.xml.soap.Node;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -18,7 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
-import java.util.TreeMap;
 
 /**
  * @author : wangcheng
@@ -270,17 +262,17 @@ public class Solution {
         if (root == null) {
             return 0;
         }
-        if (root.getL() == null && root.getR() == null) {
+        if (root.getLeft() == null && root.getRight() == null) {
             return 1;
         }
-        return 1 + Math.max(maxDepth(root.getL()), maxDepth(root.getR()));
+        return 1 + Math.max(maxDepth(root.getLeft()), maxDepth(root.getRight()));
     }
 
     public int maxDepth1(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        if (root.getR() == null && root.getL() == null) {
+        if (root.getRight() == null && root.getLeft() == null) {
             return 1;
         }
         LinkedList<TreeNode> list = new LinkedList<>();
@@ -290,11 +282,11 @@ public class Solution {
             int size = list.size();
             for (int cur = 0; cur < size; cur++) {
                 TreeNode node = list.poll();
-                if (node.getL() != null) {
-                    list.offer(node.getL());
+                if (node.getLeft() != null) {
+                    list.offer(node.getLeft());
                 }
-                if (node.getR() != null) {
-                    list.offer(node.getR());
+                if (node.getRight() != null) {
+                    list.offer(node.getRight());
                 }
             }
             level++;
@@ -452,15 +444,15 @@ public class Solution {
             int size = list.size();
             for (int i = 0; i < size; i++) {
                 TreeNode node = list.poll();
-                if (node.getL() != null) {
-                    list.offer(node.getL());
+                if (node.getLeft() != null) {
+                    list.offer(node.getLeft());
                 }
-                if (node.getR() != null) {
-                    list.offer(node.getR());
+                if (node.getRight() != null) {
+                    list.offer(node.getRight());
                 }
-                TreeNode temp = node.getL();
-                node.setL(node.getR());
-                node.setR(temp);
+                TreeNode temp = node.getLeft();
+                node.setLeft(node.getRight());
+                node.setRight(temp);
             }
         }
         return root;
@@ -630,6 +622,40 @@ public class Solution {
             }
         }
         return total;
+    }
+
+    List<Integer> list = new ArrayList<> ();
+    TreeNode preNode = null;
+    int max = 0, count = 0;
+
+    public int[] findMode(TreeNode root) {
+        helper(root);
+        int[] res = new int[list.size()];
+        for (int i=0; i<res.length; i++) {
+            res[i] = list.get(i);
+        }
+        return res;
+    }
+
+    private void helper (TreeNode root) {
+        if (root == null) return;
+        helper(root.left);
+
+        if (preNode != null && root.val == preNode.val) {
+            count++;
+        } else {
+            count = 1;
+        }
+
+        if (count > max) {
+            list.clear();
+            list.add(root.val);
+            max = count;
+        } else if (max == count) {
+            list.add(root.val);
+        }
+        preNode = root;
+        helper(root.right);
     }
 
 }
