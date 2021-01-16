@@ -16,6 +16,12 @@ public class TreeNode {
         val = x;
     }
 
+    TreeNode(int x, TreeNode left, TreeNode right) {
+        this.val = x;
+        this.left = left;
+        this.right = right;
+    }
+
     public int getVal() {
         return val;
     }

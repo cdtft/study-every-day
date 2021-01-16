@@ -142,4 +142,14 @@ public class SolutionTest {
             System.out.println(value);
         }
     }
+
+    @Test
+    public void findMode() {
+        TreeNode node = new TreeNode(1, null, new TreeNode(2, new TreeNode(2), null));
+
+        int[] result = solution.findMode(node);
+        for (int i : result) {
+            System.out.println(i);
+        }
+    }
 }
