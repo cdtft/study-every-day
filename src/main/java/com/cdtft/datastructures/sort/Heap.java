@@ -8,10 +8,13 @@ package com.cdtft.datastructures.sort;
  */
 public class Heap {
 
-    private final Comparable[] pq;
+    protected final Comparable[] pq;
+
+    protected final int N;
 
     public Heap(int N) {
-        pq = new Comparable[N];
+        this.N = N;
+        this.pq = new Comparable[N];
     }
 
     public boolean less(int i, int j) {
@@ -22,6 +25,35 @@ public class Heap {
         Comparable temp = pq[i];
         pq[i] = pq[j];
         pq[j] = temp;
+    }
+
+    /**
+     * 由下至上的堆的有序化
+     *
+     * @param k
+     */
+    protected void swim(int k) {
+        while (k > 1 && less(k / 2, k)) {
+            exch(k, k / 2);
+        }
+    }
+
+    /**
+     * 由上至下堆的有序化
+     *
+     * @param k
+     */
+    protected void sink(int k) {
+        while (2 * k <= N) {
+            int j = 2 * k;
+            //找出 2K位置小还是2k+1位置小, 让较大的节点和父节点进行交换
+            if (j < N && less(j, j+1)) {
+                j++;
+            }
+            if (less(k, j)) {
+                exch(k, j);
+            }
+        }
     }
 
 }

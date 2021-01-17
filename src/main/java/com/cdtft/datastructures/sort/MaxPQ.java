@@ -6,31 +6,18 @@ package com.cdtft.datastructures.sort;
  * @author : 努力学习JAVA的wangcheng
  * @date : 2021年01月12日 16:21
  */
-public class MaxPQ <Key extends Comparable<Key>> {
+public class MaxPQ extends Heap {
 
 
-    /**
-     * 创建初始容量为N的有限队列
-     *
-     * @param N
-     */
     public MaxPQ(int N) {
-
+        super(N);
     }
 
-    public MaxPQ(Key[] a) {
-
-    }
-
-    void insert(Key v) {
-
-    }
-
-    public Key Max() {
+    public Comparable Max() {
         return null;
     }
 
-    public Key DelMax() {
+    public Comparable DelMax() {
         return null;
     }
 
