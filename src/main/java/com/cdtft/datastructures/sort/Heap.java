@@ -10,11 +10,10 @@ public class Heap {
 
     protected final Comparable[] pq;
 
-    protected final int N;
+    protected int N = 0;
 
     public Heap(int N) {
-        this.N = N;
-        this.pq = new Comparable[N];
+        this.pq = new Comparable[N + 1];
     }
 
     public boolean less(int i, int j) {
@@ -47,13 +46,17 @@ public class Heap {
         while (2 * k <= N) {
             int j = 2 * k;
             //找出 2K位置小还是2k+1位置小, 让较大的节点和父节点进行交换
-            if (j < N && less(j, j+1)) {
+            if (j < N && less(j, j + 1)) {
                 j++;
             }
             if (less(k, j)) {
                 exch(k, j);
             }
         }
+    }
+
+    protected Comparable get(int index) {
+        return pq[index];
     }
 
 }
