@@ -43,6 +43,7 @@ public class Merge extends AbstractSort {
         }
 
         for (int k = low; k <= high; k++) {
+            //使用多出来的进行填充
             if (i > mid) {
                 a[k] = aux[j++];
             } else if (j > high) {
