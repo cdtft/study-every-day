@@ -34,13 +34,14 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         int hi = N ;
         while (lo < hi) {
             int mid = (lo + hi) / 2;
-            if (keys[mid].compareTo(key) == 0) {
+            int compare =  keys[mid].compareTo(key);
+            if (compare == 0) {
                 return mid;
             }
-            if (keys[mid].compareTo(key) < 0) {
+            if (compare < 0) {
                 lo = mid + 1;
             }
-            if (keys[mid].compareTo(key) > 0) {
+            if (compare > 0) {
                 hi = mid;
             }
         }
