@@ -83,10 +83,13 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     public static void main(String[] args) {
         BinarySearchST<Integer, Integer> binarySearchST = new BinarySearchST<>(5);
         binarySearchST.put(1, 2);
-        binarySearchST.put(5, 3);
-        binarySearchST.put(2, 3);
-        binarySearchST.put(100, 3);
-        binarySearchST.put(42, 3);
+        binarySearchST.put(5, 5);
+        binarySearchST.put(2, 2);
+        binarySearchST.put(100, 100);
+        binarySearchST.put(42, 42);
+        binarySearchST.put(2, 2);
+        binarySearchST.put(2, 2);
+        binarySearchST.put(2, 2);
         binarySearchST.showKeyAndValue();
     }
 
