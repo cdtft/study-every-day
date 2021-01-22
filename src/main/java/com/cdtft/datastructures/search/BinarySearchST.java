@@ -31,10 +31,20 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     public int rank(Key key) {
         int lo = 0;
-        int hi = N - 1;
-        while () {
-
+        int hi = N ;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (keys[mid].compareTo(key) == 0) {
+                return mid;
+            }
+            if (keys[mid].compareTo(key) < 0) {
+                lo = mid + 1;
+            }
+            if (keys[mid].compareTo(key) > 0) {
+                hi = mid;
+            }
         }
+        return lo;
     }
 
     public Value get(Key key) {
@@ -56,7 +66,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             return;
         }
         //将key和value向后移动
-        for (int i = N; i >= index; i--) {
+        for (int i = N; i > index; i--) {
             values[i] = values[i - 1];
             keys[i] = keys[i - 1];
         }
@@ -66,8 +76,8 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     public void showKeyAndValue() {
-        System.out.println(Arrays.toString(values));
         System.out.println(Arrays.toString(keys));
+        System.out.println(Arrays.toString(values));
     }
 
     public static void main(String[] args) {
@@ -75,6 +85,8 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         binarySearchST.put(1, 2);
         binarySearchST.put(5, 3);
         binarySearchST.put(2, 3);
+        binarySearchST.put(100, 3);
+        binarySearchST.put(42, 3);
         binarySearchST.showKeyAndValue();
     }
 
