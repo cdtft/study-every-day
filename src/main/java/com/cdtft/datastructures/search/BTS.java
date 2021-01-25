@@ -42,10 +42,14 @@ public class BTS<Key extends Comparable<Key>, Value> {
         root = put(root, key, value);
     }
 
+    public Value get(Key key) {
+        return get(root, key);
+    }
+
     /**
      * 二叉搜索树的put方法
      *
-     * @param node 处理本次put操作的节点
+     * @param node  处理本次put操作的节点
      * @param key
      * @param value
      * @return
@@ -72,10 +76,28 @@ public class BTS<Key extends Comparable<Key>, Value> {
         return node;
     }
 
+    private Value get(Node node, Key key) {
+        if (node == null) {
+            return null;
+        }
+        int compare = node.key.compareTo(key);
+        if (compare == 0) {
+            return node.value;
+        }
+        if (compare > 0) {
+            return get(node.left, key);
+        }
+        if (compare < 0) {
+            return get(node.right, key);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         BTS<Integer, Integer> bts = new BTS<>();
         bts.put(1, 1);
         bts.put(2, 3);
-        System.out.println(bts.size());
+        System.out.println("size: " + bts.size());
+        System.out.println("key 1, value:" + bts.get(1));
     }
 }
