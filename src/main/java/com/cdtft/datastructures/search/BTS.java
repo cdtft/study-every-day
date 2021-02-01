@@ -87,10 +87,7 @@ public class BTS<Key extends Comparable<Key>, Value> {
         if (compare > 0) {
             return get(node.left, key);
         }
-        if (compare < 0) {
-            return get(node.right, key);
-        }
-        return null;
+        return get(node.right, key);
     }
 
     public static void main(String[] args) {
