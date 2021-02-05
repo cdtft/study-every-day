@@ -3,6 +3,8 @@ package com.cdtft.concurrency.threadlocal;
 import com.cdtft.concurrency.threadstate.SleepUtils;
 
 /**
+ * 在面向切面编程的时候可以使用该技巧
+ *
  * @author: wangcheng
  * @date: 2021年02月05 17:46
  */
