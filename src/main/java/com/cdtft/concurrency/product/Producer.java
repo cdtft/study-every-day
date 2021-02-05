@@ -1,4 +1,4 @@
-package com.cdtft.concurrency.lock.product;
+package com.cdtft.concurrency.product;
 
 import java.util.List;
 

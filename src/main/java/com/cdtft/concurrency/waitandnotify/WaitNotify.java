@@ -1,4 +1,4 @@
-package com.cdtft.concurrency.lock.waitandnotify;
+package com.cdtft.concurrency.waitandnotify;
 
 import com.cdtft.concurrency.threadstate.SleepUtils;
 
