@@ -53,8 +53,6 @@ public class MyArrayList<T> implements Iterable<T> {
             ensureCapacity(size() * 2);
         }
         //考虑如果index不是插入到队列尾部的时候向后移动位置
-
-
     }
 
     private void ensureCapacity(int newCapacity) {
