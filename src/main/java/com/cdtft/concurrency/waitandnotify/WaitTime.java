@@ -3,6 +3,10 @@ package com.cdtft.concurrency.waitandnotify;
 import com.cdtft.concurrency.threadstate.SleepUtils;
 
 /**
+ * wait设置超时时间：
+ *      1.在超时时间内被唤醒
+ *      2.超出等待时间
+ *
  * @author: wangcheng
  * @date: 2021年02月07 13:44
  */
