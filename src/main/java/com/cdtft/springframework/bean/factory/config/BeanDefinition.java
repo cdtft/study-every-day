@@ -6,13 +6,13 @@ package com.cdtft.springframework.bean.factory.config;
  */
 public class BeanDefinition {
 
-    private final Class beanClass;
+    private final Class<?> beanClass;
 
-    public BeanDefinition (Class beanClass) {
+    public BeanDefinition (Class<?> beanClass) {
         this.beanClass = beanClass;
     }
 
-    public Class getBeanClass() {
+    public Class<?> getBeanClass() {
         return beanClass;
     }
 }
