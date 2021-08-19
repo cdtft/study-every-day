@@ -6,7 +6,17 @@ package com.cdtft.springframework.bean.factory.support;
  */
 public class UserService {
 
+    private final String name;
+
+    public UserService(String name) {
+        this.name = name;
+    }
+
     public void sayHi() {
         System.out.println("hi!");
+    }
+
+    public void printName() {
+        System.out.println(name);
     }
 }

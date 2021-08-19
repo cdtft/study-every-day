@@ -17,4 +17,13 @@ public class DefaultListableBeanFactoryTest {
         UserService userService = (UserService) defaultListableBeanFactory.getBean("userService");
         userService.sayHi();
     }
+
+    @Test
+    public void createBeanWithConstructor() {
+        DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
+        BeanDefinition beanDefinition = new BeanDefinition(UserService.class);
+        defaultListableBeanFactory.registerBeanDefinition("userService", beanDefinition);
+        UserService userService = (UserService) defaultListableBeanFactory.getBean("userService", "王城");
+        userService.printName();
+    }
 }
