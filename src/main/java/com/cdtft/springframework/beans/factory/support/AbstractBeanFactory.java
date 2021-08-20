@@ -1,9 +1,9 @@
-package com.cdtft.springframework.bean.factory.support;
+package com.cdtft.springframework.beans.factory.support;
 
-import com.cdtft.springframework.bean.BeansException;
-import com.cdtft.springframework.bean.factory.BeanFactory;
-import com.cdtft.springframework.bean.factory.config.BeanDefinition;
-import com.cdtft.springframework.bean.factory.config.DefaultSingletonBeanRegistry;
+import com.cdtft.springframework.beans.BeansException;
+import com.cdtft.springframework.beans.factory.BeanFactory;
+import com.cdtft.springframework.beans.factory.config.BeanDefinition;
+import com.cdtft.springframework.beans.factory.config.DefaultSingletonBeanRegistry;
 
 /**
  * @author: wangcheng

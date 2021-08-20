@@ -1,4 +1,4 @@
-package com.cdtft.springframework.bean;
+package com.cdtft.springframework.beans;
 
 /**
  * @author: wangcheng

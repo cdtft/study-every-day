@@ -1,4 +1,4 @@
-package com.cdtft.springframework.bean.factory.config;
+package com.cdtft.springframework.beans.factory.config;
 
 import java.util.HashMap;
 import java.util.Map;
