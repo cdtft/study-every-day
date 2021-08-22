@@ -13,7 +13,7 @@ import java.lang.reflect.Constructor;
  */
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory {
 
-    private InstantiationStrategy instantiationStrategy = new CglibSubclassingInstantiationStrategy();
+    private final InstantiationStrategy instantiationStrategy = new CglibSubclassingInstantiationStrategy();
 
     @Override
     protected Object createBean(String beanName, BeanDefinition beanDefinition) throws BeansException {
@@ -29,7 +29,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     @Override
     protected Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException {
-        return createBeanInstance(beanName, beanDefinition, args);
+        Object bean = null;
+        try {
+            bean = createBeanInstance(beanName, beanDefinition, args);
+        } catch (Exception e) {
+            throw new BeansException("Instantiation if bean failed", e);
+        }
+        addSingleton(beanName, bean);
+        return bean;
     }
 
     protected Object createBeanInstance(String beanName, BeanDefinition beanDefinition, Object[] args) {
