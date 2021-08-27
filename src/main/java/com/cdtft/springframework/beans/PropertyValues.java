@@ -17,7 +17,7 @@ public class PropertyValues {
 
     public void addPropertyValue(PropertyValue pv) {
         this.propertyValueList.add(pv);
-        this.namePropertyValueMap.put(pv.getName(), pv);
+        this.namePropertyValueMap.put(pv.getFieldName(), pv);
     }
 
     public PropertyValue[] getPropertyValues() {

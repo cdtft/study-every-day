@@ -6,17 +6,17 @@ package com.cdtft.springframework.beans;
  */
 public class PropertyValue {
 
-    private final String name;
+    private final String fieldName;
 
     private final Object value;
 
-    public PropertyValue(String name, Object value) {
-        this.name = name;
+    public PropertyValue(String fieldName, Object value) {
+        this.fieldName = fieldName;
         this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public String getFieldName() {
+        return fieldName;
     }
 
     public Object getValue() {

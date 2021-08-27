@@ -6,6 +6,8 @@ package com.cdtft.springframework.beans.factory.support;
  */
 public class UserService {
 
+    private UserDao userDao;
+
     private final String name;
 
     public UserService(String name) {
@@ -18,5 +20,9 @@ public class UserService {
 
     public void printName() {
         System.out.println(name);
+    }
+
+    public void printName(Integer userId) {
+        System.out.println(userDao.findByUserNameById(userId));
     }
 }

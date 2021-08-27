@@ -21,7 +21,8 @@ public class BeanUtils {
         Class<?> clazz = bean.getClass();
         Field declaredFields = null;
         try {
-            declaredFields = clazz.getDeclaredField(fieldName);
+            //代理类的父类是原始类
+            declaredFields = clazz.getSuperclass().getDeclaredField(fieldName);
             declaredFields.setAccessible(true);
             declaredFields.set(bean, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
