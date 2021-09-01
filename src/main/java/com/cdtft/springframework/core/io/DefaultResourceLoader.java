@@ -12,7 +12,7 @@ public class DefaultResourceLoader implements ResourceLoader {
     @Override
     public Resource getResource(String location) {
         if (location.startsWith(CLASSPATH_URL_PREFIX)) {
-            return new ClassPathResource(location);
+            return new ClassPathResource(location.replace(CLASSPATH_URL_PREFIX, ""));
         }
         try {
             URL url = new URL(location);

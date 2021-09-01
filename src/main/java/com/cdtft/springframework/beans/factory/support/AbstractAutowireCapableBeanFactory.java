@@ -21,15 +21,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     @Override
     protected Object createBean(String beanName, BeanDefinition beanDefinition) throws BeansException {
-        Object bean = null;
-        try {
-            bean = beanDefinition.getBeanClass().newInstance();
-            applyPropertyValues(beanName, bean, beanDefinition);
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new BeansException("创建bean失败", e);
-        }
-        addSingleton(beanName, bean);
-        return bean;
+        return createBean(beanName, beanDefinition, null);
     }
 
     @Override
@@ -49,11 +41,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Constructor<?> constructor = null;
         Class<?> clazz = beanDefinition.getBeanClass();
         Constructor<?>[] declaredConstructors = clazz.getDeclaredConstructors();
-        for (Constructor<?> ctor : declaredConstructors) {
-            //构造参数的长度和传参保持一直
-            if (ctor != null && ctor.getParameterTypes().length == args.length) {
-                constructor = ctor;
-                break;
+        if (args != null) {
+            for (Constructor<?> ctor : declaredConstructors) {
+                //构造参数的长度和传参保持一直
+                if (ctor != null && ctor.getParameterTypes().length == args.length) {
+                    constructor = ctor;
+                    break;
+                }
             }
         }
         return instantiationStrategy.instantiate(beanDefinition, beanName, constructor, args);

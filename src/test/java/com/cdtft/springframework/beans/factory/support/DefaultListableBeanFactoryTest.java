@@ -4,8 +4,12 @@ import com.cdtft.springframework.beans.BeanReference;
 import com.cdtft.springframework.beans.PropertyValue;
 import com.cdtft.springframework.beans.PropertyValues;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
+import com.cdtft.springframework.core.io.ClassPathResource;
+import com.cdtft.springframework.core.io.XmlBeanDefinitionReader;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 
 /**
@@ -68,6 +72,31 @@ public class DefaultListableBeanFactoryTest {
 
         UserService userService = (UserService) beanFactory.getBean("userService", "wangcheng");
         userService.printName(2);
+    }
+
+    @Test
+    public void testXmlBeanDefinitionReader() {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
+        xmlBeanDefinitionReader.loadBeanDefinitions("classpath:spring.xml");
+        UserService userService = (UserService) beanFactory.getBean("userService", "wangcheng");
+        userService.printName();
+        userService.printName(1);
+        userService.printUid();
+    }
+
+    @Test
+    public void testClassPathResource() {
+        ClassPathResource resourceLoader = new ClassPathResource("spring.xml");
+        try {
+            InputStream inputStream = resourceLoader.getInputStream();
+            if (inputStream == null) {
+                System.out.println("inputStream is null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

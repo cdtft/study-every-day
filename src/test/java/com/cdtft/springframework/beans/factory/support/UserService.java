@@ -8,6 +8,8 @@ public class UserService {
 
     private UserDao userDao;
 
+    private String uId;
+
     private final String name;
 
     public UserService(String name) {
@@ -25,4 +27,9 @@ public class UserService {
     public void printName(Integer userId) {
         System.out.println(userDao.findByUserNameById(userId));
     }
+
+    public void printUid() {
+        System.out.println(uId);
+    }
+
 }
