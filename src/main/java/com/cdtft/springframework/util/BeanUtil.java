@@ -1,4 +1,4 @@
-package com.cdtft.springframework.beans.utils;
+package com.cdtft.springframework.util;
 
 import com.cdtft.springframework.beans.BeansException;
 
@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
  * @author: wangcheng
  * @date: 2021年08月22 10:59
  */
-public class BeanUtils {
+public class BeanUtil {
 
     /**
      * 通过反射设置bean的属性

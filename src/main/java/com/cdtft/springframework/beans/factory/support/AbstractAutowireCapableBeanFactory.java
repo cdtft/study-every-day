@@ -5,7 +5,7 @@ import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.PropertyValue;
 import com.cdtft.springframework.beans.PropertyValues;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
-import com.cdtft.springframework.beans.utils.BeanUtils;
+import com.cdtft.springframework.util.BeanUtil;
 
 import java.lang.reflect.Constructor;
 
@@ -64,7 +64,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                     BeanReference beanReference = (BeanReference) value;
                     value = getBean(beanReference.getName());
                 }
-                BeanUtils.setFieldValue(bean, fieldName, value);
+                BeanUtil.setFieldValue(bean, fieldName, value);
             }
         } catch (Exception e) {
             throw new BeansException("Error setting property values:" + beanName);
