@@ -13,12 +13,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
     @Override
     public Object getBean(String className) {
-        Object bean = getSingleton(className);
-        if (bean != null) {
-            return bean;
-        }
-        BeanDefinition beanDefinition = getBeanDefinition(className);
-        return createBean(className, beanDefinition);
+        return getBean(className, (Object[]) null);
     }
 
     @Override
@@ -29,6 +24,16 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
         }
         BeanDefinition beanDefinition = getBeanDefinition(name);
         return createBean(name, beanDefinition, args);
+    }
+
+
+    @Override
+    public <T> T getBean(String name, Class<T> clazz) {
+        Object bean = getBean(name);
+        if (clazz.isInstance(bean)) {
+            return clazz.cast(bean);
+        }
+        throw new BeansException("Fail to cast bean");
     }
 
     protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;

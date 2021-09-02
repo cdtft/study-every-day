@@ -99,4 +99,14 @@ public class DefaultListableBeanFactoryTest {
 
     }
 
+    @Test
+    public void testConvertBean() {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
+        xmlBeanDefinitionReader.loadBeanDefinitions("classpath:spring.xml");
+        UserDao userDao = beanFactory.getBean("userDao", UserDao.class);
+        System.out.println(userDao.findByUserNameById(2));
+    }
+
+
 }
