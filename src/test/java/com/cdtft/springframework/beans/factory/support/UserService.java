@@ -8,24 +8,14 @@ public class UserService {
 
     private UserDao userDao;
 
-    private String uId;
-
-    private final String name;
-
-    public UserService(String name) {
-        this.name = name;
-    }
+    private Integer uId;
 
     public void sayHi() {
         System.out.println("hi!");
     }
 
     public void printName() {
-        System.out.println(name);
-    }
-
-    public void printName(Integer userId) {
-        System.out.println(userDao.findByUserNameById(userId));
+        System.out.println(userDao.findByUserNameById(uId));
     }
 
     public void printUid() {

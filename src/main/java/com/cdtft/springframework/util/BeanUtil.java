@@ -19,12 +19,17 @@ public class BeanUtil {
      */
     public static void setFieldValue(Object bean, String fieldName, Object value)  {
         Class<?> clazz = bean.getClass();
+        Object setValue = value;
+
         Field declaredFields = null;
         try {
             //代理类的父类是原始类
             declaredFields = clazz.getSuperclass().getDeclaredField(fieldName);
             declaredFields.setAccessible(true);
-            declaredFields.set(bean, value);
+            if (declaredFields.getType().isAssignableFrom(Integer.class)) {
+                setValue = Integer.valueOf(value.toString());
+            }
+            declaredFields.set(bean, setValue);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new BeansException("Fail set Bean field value");
         }

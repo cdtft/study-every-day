@@ -38,7 +38,7 @@ public class DefaultListableBeanFactoryTest {
         DefaultListableBeanFactory defaultListableBeanFactory = new DefaultListableBeanFactory();
         BeanDefinition beanDefinition = new BeanDefinition(UserService.class);
         defaultListableBeanFactory.registerBeanDefinition("userService", beanDefinition);
-        UserService userService = (UserService) defaultListableBeanFactory.getBean("userService", "wangcheng");
+        UserService userService = (UserService) defaultListableBeanFactory.getBean("userService");
         userService.printName();
     }
 
@@ -70,8 +70,8 @@ public class DefaultListableBeanFactoryTest {
         BeanDefinition userServiceBeanDefinition = new BeanDefinition(UserService.class, propertyValues);
         beanFactory.registerBeanDefinition("userService", userServiceBeanDefinition);
 
-        UserService userService = (UserService) beanFactory.getBean("userService", "wangcheng");
-        userService.printName(2);
+        UserService userService = (UserService) beanFactory.getBean("userService");
+        userService.printUid();
     }
 
     @Test
@@ -79,10 +79,8 @@ public class DefaultListableBeanFactoryTest {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         xmlBeanDefinitionReader.loadBeanDefinitions("classpath:spring.xml");
-        UserService userService = (UserService) beanFactory.getBean("userService", "wangcheng");
+        UserService userService = (UserService) beanFactory.getBean("userService");
         userService.printName();
-        userService.printName(1);
-        userService.printUid();
     }
 
     @Test
