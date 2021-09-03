@@ -1,6 +1,7 @@
 package com.cdtft.springframework.beans.factory.support;
 
 import com.cdtft.springframework.beans.BeansException;
+import com.cdtft.springframework.beans.factory.ConfigurableListableBeanFactory;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author: wangcheng
  * @date: 2021年08月04 14:59
  */
-public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry {
+public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry, ConfigurableListableBeanFactory {
 
     private static final Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 
@@ -26,6 +27,11 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     }
 
     @Override
+    public void preInstantiateSingletons() throws BeansException {
+
+    }
+
+    @Override
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
         beanDefinitionMap.put(beanName, beanDefinition);
     }
@@ -33,6 +39,23 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     @Override
     public boolean containsBeanDefinition(String beanName) {
         return false;
+    }
+
+    @Override
+    public <T> Map<String, T> getBeansOfType(Class<T> requiredType) throws BeansException {
+        Map<String, T> result = new HashMap<>();
+        beanDefinitionMap.forEach((beanName, beanDefinition) -> {
+            Class beanClass = beanDefinition.getBeanClass();
+            if (requiredType.isAssignableFrom(beanClass)) {
+                result.put(beanName, requiredType.cast(getBean(beanName)));
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public String[] getBeanDefinitionNames() {
+        return new String[0];
     }
 
 }

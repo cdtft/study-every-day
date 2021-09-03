@@ -1,15 +1,21 @@
 package com.cdtft.springframework.beans.factory.support;
 
 import com.cdtft.springframework.beans.BeansException;
-import com.cdtft.springframework.beans.factory.BeanFactory;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
+import com.cdtft.springframework.beans.factory.config.BeanPostProcessor;
+import com.cdtft.springframework.beans.factory.config.ConfigurableBeanFactory;
 import com.cdtft.springframework.beans.factory.config.DefaultSingletonBeanRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: wangcheng
  * @date: 2021年08月03 13:50
  */
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory {
+
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     @Override
     public Object getBean(String className) {
@@ -34,6 +40,15 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
             return clazz.cast(bean);
         }
         throw new BeansException("Fail to cast bean");
+    }
+
+    @Override
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
+        beanPostProcessors.add(beanPostProcessor);
+    }
+
+    public List<BeanPostProcessor> getBeanPostProcessors() {
+        return this.beanPostProcessors;
     }
 
     protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;
