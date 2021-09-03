@@ -4,7 +4,7 @@
     <bean id="userDao" class="com.cdtft.springframework.beans.factory.support.UserDao"/>
 
     <bean id="userService" class="com.cdtft.springframework.beans.factory.support.UserService">
-        <property name="uId" value="1"/>
+        <property name="userId" value="1"/>
         <property name="userDao" ref="userDao"/>
     </bean>
 

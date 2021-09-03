@@ -4,6 +4,7 @@ import com.cdtft.springframework.beans.BeanReference;
 import com.cdtft.springframework.beans.PropertyValue;
 import com.cdtft.springframework.beans.PropertyValues;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
+import com.cdtft.springframework.context.support.ClassPathXmlApplicationContext;
 import com.cdtft.springframework.core.io.ClassPathResource;
 import com.cdtft.springframework.core.io.XmlBeanDefinitionReader;
 import org.junit.Test;
@@ -104,6 +105,14 @@ public class DefaultListableBeanFactoryTest {
         xmlBeanDefinitionReader.loadBeanDefinitions("classpath:spring.xml");
         UserDao userDao = beanFactory.getBean("userDao", UserDao.class);
         System.out.println(userDao.findByUserNameById(2));
+    }
+
+    @Test
+    public void testBeanPostProcessor() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext();
+        applicationContext.refresh();
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        userService.printName();
     }
 
 
