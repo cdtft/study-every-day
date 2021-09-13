@@ -4,12 +4,15 @@ import com.cdtft.springframework.beans.BeanReference;
 import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.PropertyValue;
 import com.cdtft.springframework.beans.PropertyValues;
+import com.cdtft.springframework.beans.factory.InitializingBean;
 import com.cdtft.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
 import com.cdtft.springframework.beans.factory.config.BeanPostProcessor;
 import com.cdtft.springframework.util.BeanUtil;
+import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -61,15 +64,30 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     private Object initializeBean(String beanName, Object bean, BeanDefinition beanDefinition) {
+
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
 
-        invokeInitMethods(beanName, bean, beanDefinition);
+        try {
+            invokeInitMethods(beanName, bean, beanDefinition);
+        } catch (Exception e) {
+            throw new BeansException("Fail invoke init method");
+        }
 
         wrappedBean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
         return wrappedBean;
     }
 
-    private void invokeInitMethods(String beanName, Object wrappedBean, BeanDefinition beanDefinition) {
+    private void invokeInitMethods(String beanName, Object wrappedBean, BeanDefinition beanDefinition) throws Exception {
+        if (wrappedBean instanceof InitializingBean) {
+            InitializingBean initializingBean = (InitializingBean) wrappedBean;
+            initializingBean.afterPropertiesSet();
+        }
+        String initMethodName = beanDefinition.getInitMethodName();
+        if (StringUtils.isNotBlank(initMethodName)) {
+            //return not null
+            Method method = beanDefinition.getBeanClass().getMethod(initMethodName);
+            method.invoke(wrappedBean);
+        }
 
     }
 

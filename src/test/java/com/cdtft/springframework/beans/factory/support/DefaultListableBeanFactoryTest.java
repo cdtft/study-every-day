@@ -113,7 +113,7 @@ public class DefaultListableBeanFactoryTest {
         applicationContext.refresh();
         UserService userService = applicationContext.getBean("userService", UserService.class);
         userService.printName();
-    }
 
+    }
 
 }
