@@ -10,4 +10,6 @@ public interface ConfigurableBeanFactory extends SingletonBeanRegistry, BeanFact
 
     void addBeanPostProcessor(BeanPostProcessor beanPostProcessor);
 
+    void destroySingletons();
+
 }

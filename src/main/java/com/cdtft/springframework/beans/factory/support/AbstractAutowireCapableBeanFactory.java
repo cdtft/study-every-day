@@ -4,6 +4,7 @@ import com.cdtft.springframework.beans.BeanReference;
 import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.PropertyValue;
 import com.cdtft.springframework.beans.PropertyValues;
+import com.cdtft.springframework.beans.factory.DisposableBean;
 import com.cdtft.springframework.beans.factory.InitializingBean;
 import com.cdtft.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
@@ -44,6 +45,48 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             throw new BeansException("Instantiation if bean failed", e);
         }
         addSingleton(beanName, bean);
+
+        registerDisposableBeanIfNecessary(beanName, bean, beanDefinition);
+
+        return bean;
+    }
+
+    @Override
+    public void applyBeanPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
+        try {
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                //字段名称
+                String fieldName = propertyValue.getFieldName();
+                Object value = propertyValue.getValue();
+                if (value instanceof BeanReference) {
+                    BeanReference beanReference = (BeanReference) value;
+                    value = getBean(beanReference.getName());
+                }
+                BeanUtil.setFieldValue(bean, fieldName, value);
+            }
+        } catch (Exception e) {
+            throw new BeansException("Error setting property values:" + beanName);
+        }
+    }
+
+    @Override
+    public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName) throws BeansException {
+        Object bean = existingBean;
+        List<BeanPostProcessor> beanPostProcessors = getBeanPostProcessors();
+        for (BeanPostProcessor processor : beanPostProcessors) {
+            processor.postProcessBeforeInitialization(bean, beanName);
+        }
+        return bean;
+    }
+
+    @Override
+    public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName) throws BeansException {
+        Object bean = existingBean;
+        List<BeanPostProcessor> beanPostProcessors = getBeanPostProcessors();
+        for (BeanPostProcessor processor : beanPostProcessors) {
+            processor.postProcessAfterInitialization(bean, beanName);
+        }
         return bean;
     }
 
@@ -91,42 +134,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     }
 
-    @Override
-    public void applyBeanPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
-        try {
-            PropertyValues propertyValues = beanDefinition.getPropertyValues();
-            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
-                //字段名称
-                String fieldName = propertyValue.getFieldName();
-                Object value = propertyValue.getValue();
-                if (value instanceof BeanReference) {
-                    BeanReference beanReference = (BeanReference) value;
-                    value = getBean(beanReference.getName());
-                }
-                BeanUtil.setFieldValue(bean, fieldName, value);
-            }
-        } catch (Exception e) {
-            throw new BeansException("Error setting property values:" + beanName);
+    private void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
+        if (bean instanceof DisposableBean || StringUtils.isNotBlank(beanDefinition.getDestroyMethodName())) {
+            registerDisposableBean(beanName, bean);
         }
     }
 
-    @Override
-    public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName) throws BeansException {
-        Object bean = existingBean;
-        List<BeanPostProcessor> beanPostProcessors = getBeanPostProcessors();
-        for (BeanPostProcessor processor : beanPostProcessors) {
-            processor.postProcessBeforeInitialization(bean, beanName);
-        }
-        return bean;
-    }
-
-    @Override
-    public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName) throws BeansException {
-        Object bean = existingBean;
-        List<BeanPostProcessor> beanPostProcessors = getBeanPostProcessors();
-        for (BeanPostProcessor processor : beanPostProcessors) {
-            processor.postProcessAfterInitialization(bean, beanName);
-        }
-        return bean;
-    }
 }
