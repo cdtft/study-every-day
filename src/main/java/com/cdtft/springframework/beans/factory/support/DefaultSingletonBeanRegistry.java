@@ -1,7 +1,9 @@
-package com.cdtft.springframework.beans.factory.config;
+package com.cdtft.springframework.beans.factory.support;
 
 import cn.hutool.core.bean.BeanException;
 import com.cdtft.springframework.beans.factory.DisposableBean;
+import com.cdtft.springframework.beans.factory.config.BeanDefinition;
+import com.cdtft.springframework.beans.factory.config.SingletonBeanRegistry;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -33,9 +35,15 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
         singletonObjects.put(beanName, singleObject);
     }
 
-    public void registerDisposableBean(String beanName, Object bean) {
-        synchronized (this.disposableBeans) {
-            disposableBeans.put(beanName, bean);
+    public void registerDisposableBean(String beanName, Object bean, BeanDefinition beanDefinition) {
+        if (bean instanceof DisposableBean) {
+            synchronized (this.disposableBeans) {
+                disposableBeans.put(beanName, bean);
+            }
+        } else {
+            //没有实现DisposableBean接口的但是在配置文件中有销毁方法
+            //则新建适配器
+            disposableBeans.put(beanName, new DisposableBeanAdapter(bean, beanDefinition.getDestroyMethodName()));
         }
     }
 
@@ -43,7 +51,7 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
         Set<String> strings = disposableBeans.keySet();
         //倒序remove
         Object[] beanNames = strings.toArray();
-        for (int i = beanNames.length - 1; i > 0; i--) {
+        for (int i = beanNames.length - 1; i >= 0; i--) {
             Object beanName = beanNames[i];
             DisposableBean o = (DisposableBean) disposableBeans.remove(beanName.toString());
             try {

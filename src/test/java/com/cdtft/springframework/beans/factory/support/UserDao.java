@@ -11,11 +11,17 @@ public class UserDao {
 
     private static final Map<Integer, String> idToUserNameMap = new HashMap<>();
 
-    static {
+    public void initData() {
+        System.out.println("==========userDao start inti data==========");
         idToUserNameMap.put(1, "张三");
         idToUserNameMap.put(2, "李四");
         idToUserNameMap.put(3, "王五");
         idToUserNameMap.put(4, "小艾");
+    }
+
+    public void clearData() {
+        System.out.println("==========userDao start clear data==========");
+        idToUserNameMap.clear();
     }
 
     public String findByUserNameById(Integer userId) {

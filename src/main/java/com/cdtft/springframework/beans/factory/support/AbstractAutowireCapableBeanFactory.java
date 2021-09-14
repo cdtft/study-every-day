@@ -136,7 +136,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     private void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
         if (bean instanceof DisposableBean || StringUtils.isNotBlank(beanDefinition.getDestroyMethodName())) {
-            registerDisposableBean(beanName, bean);
+            registerDisposableBean(beanName, bean, beanDefinition);
         }
     }
 

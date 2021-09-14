@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
 
-    <bean id="userDao" class="com.cdtft.springframework.beans.factory.support.UserDao"/>
+    <bean id="userDao" class="com.cdtft.springframework.beans.factory.support.UserDao" init-method="initData" destroy-method="clearData"/>
 
     <bean id="userService" class="com.cdtft.springframework.beans.factory.support.UserService">
         <property name="userId" value="1"/>

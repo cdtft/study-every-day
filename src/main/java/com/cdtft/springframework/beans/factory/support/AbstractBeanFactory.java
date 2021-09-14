@@ -4,7 +4,6 @@ import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
 import com.cdtft.springframework.beans.factory.config.BeanPostProcessor;
 import com.cdtft.springframework.beans.factory.config.ConfigurableBeanFactory;
-import com.cdtft.springframework.beans.factory.config.DefaultSingletonBeanRegistry;
 
 import java.util.ArrayList;
 import java.util.List;

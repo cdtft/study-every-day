@@ -30,6 +30,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
         beanFactory.preInstantiateSingletons();
 
+        registerShutdownHook();
+
     }
 
     protected abstract void refreshBeanFactory() throws BeansException;
