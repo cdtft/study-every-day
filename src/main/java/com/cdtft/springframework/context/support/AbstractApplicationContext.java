@@ -4,6 +4,7 @@ import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.factory.ConfigurableListableBeanFactory;
 import com.cdtft.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import com.cdtft.springframework.beans.factory.config.BeanPostProcessor;
+import com.cdtft.springframework.beans.factory.support.ApplicationContextAwareProcessor;
 import com.cdtft.springframework.context.ConfigurableApplicationContext;
 import com.cdtft.springframework.core.io.DefaultResourceLoader;
 
@@ -22,6 +23,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         refreshBeanFactory();
 
         ConfigurableListableBeanFactory beanFactory = getBeanFactory();
+
+        beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
 
         invokeBeanFactoryPostProcessors(beanFactory);
 

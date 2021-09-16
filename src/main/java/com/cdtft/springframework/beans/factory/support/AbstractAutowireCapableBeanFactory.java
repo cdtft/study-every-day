@@ -4,6 +4,9 @@ import com.cdtft.springframework.beans.BeanReference;
 import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.PropertyValue;
 import com.cdtft.springframework.beans.PropertyValues;
+import com.cdtft.springframework.beans.factory.Aware;
+import com.cdtft.springframework.beans.factory.BeanFactoryAware;
+import com.cdtft.springframework.beans.factory.BeanNameAware;
 import com.cdtft.springframework.beans.factory.DisposableBean;
 import com.cdtft.springframework.beans.factory.InitializingBean;
 import com.cdtft.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -37,6 +40,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         try {
             bean = createBeanInstance(beanName, beanDefinition, args);
 
+            //填充bean属性
             applyBeanPropertyValues(beanName, bean, beanDefinition);
 
             initializeBean(beanName, bean, beanDefinition);
@@ -107,6 +111,17 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     private Object initializeBean(String beanName, Object bean, BeanDefinition beanDefinition) {
+
+        if (bean instanceof Aware) {
+            if (bean instanceof BeanFactoryAware) {
+                ((BeanFactoryAware) bean).setBeanFactory(this);
+            }
+
+            if (bean instanceof BeanNameAware) {
+                ((BeanNameAware) bean).setBeanName(beanName);
+            }
+        }
+
 
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
 
