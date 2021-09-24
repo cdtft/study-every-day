@@ -12,4 +12,15 @@
 
     </bean>
 
+    <bean id="proxyUserDao" class="com.cdtft.springframework.beans.factory.support.ProxyFactoryBean">
+
+    </bean>
+
+    <bean id="iUserService" class="com.cdtft.springframework.beans.factory.support.IUserService">
+        <property name="uid" value="10001"/>
+        <property name="company" value="腾讯"/>
+        <property name="location" value="深圳"/>
+        <property name="userDao" ref="proxyUserDao"/>
+    </bean>
+
 </beans>

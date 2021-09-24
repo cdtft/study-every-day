@@ -9,6 +9,7 @@ import com.cdtft.springframework.core.io.XmlBeanDefinitionReader;
  */
 public abstract class AbstractXmlApplicationContext extends AbstractRefreshableApplicationContext {
 
+
     @Override
     protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) {
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
