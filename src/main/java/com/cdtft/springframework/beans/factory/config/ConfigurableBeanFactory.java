@@ -8,6 +8,10 @@ import com.cdtft.springframework.beans.factory.BeanFactory;
  */
 public interface ConfigurableBeanFactory extends SingletonBeanRegistry, BeanFactory {
 
+    String SCOPE_SINGLETON = "singleton";
+
+    String SCOPE_PROTOTYPE = "prototype";
+
     void addBeanPostProcessor(BeanPostProcessor beanPostProcessor);
 
     void destroySingletons();
