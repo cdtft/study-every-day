@@ -6,7 +6,7 @@ package com.cdtft.design.adapter;
  */
 public interface Turkey {
 
-    public void gobble();
+    void gobble();
 
-    public void fly();
+    void fly();
 }

@@ -1,6 +1,7 @@
 package com.cdtft.springframework.util;
 
 import com.cdtft.springframework.beans.BeansException;
+import com.cdtft.springframework.core.io.ClassUtils;
 
 import java.lang.reflect.Field;
 
@@ -21,10 +22,13 @@ public class BeanUtil {
         Class<?> clazz = bean.getClass();
         Object setValue = value;
 
+        //判断是否是cglib代理对象
+        Class<?> targetClass = ClassUtils.isCglibProxyClass(clazz) ? clazz.getSuperclass() : clazz;
+
         Field declaredFields = null;
         try {
             //代理类的父类是原始类
-            declaredFields = clazz.getSuperclass().getDeclaredField(fieldName);
+            declaredFields = targetClass.getDeclaredField(fieldName);
             declaredFields.setAccessible(true);
             if (declaredFields.getType().isAssignableFrom(Integer.class)) {
                 setValue = Integer.valueOf(value.toString());

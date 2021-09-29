@@ -8,13 +8,9 @@
         <property name="userDao" ref="userDao"/>
     </bean>
 
-    <bean id="TestBeanPostProcessor" class="com.cdtft.springframework.beans.factory.support.TestBeanPostProcessor">
+    <bean id="TestBeanPostProcessor" class="com.cdtft.springframework.beans.factory.support.TestBeanPostProcessor"/>
 
-    </bean>
-
-    <bean id="proxyUserDao" class="com.cdtft.springframework.beans.factory.support.ProxyFactoryBean">
-
-    </bean>
+    <bean id="proxyUserDao" class="com.cdtft.springframework.beans.factory.support.ProxyFactoryBean"/>
 
     <bean id="iUserService" class="com.cdtft.springframework.beans.factory.support.IUserService">
         <property name="uid" value="10001"/>
@@ -22,5 +18,8 @@
         <property name="location" value="深圳"/>
         <property name="userDao" ref="proxyUserDao"/>
     </bean>
+
+
+    <bean id="testListener" class="com.cdtft.springframework.context.TestListener"/>
 
 </beans>

@@ -1,6 +1,7 @@
 package com.cdtft.springframework.beans.factory.support;
 
 import cn.hutool.core.bean.BeanException;
+import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.factory.DisposableBean;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
 import com.cdtft.springframework.beans.factory.config.SingletonBeanRegistry;
@@ -29,6 +30,18 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
     @Override
     public Object getSingleton(String beanName) {
         return singletonObjects.get(beanName);
+    }
+
+    @Override
+    public void registerSingleton(String beanName, Object singletonObject) {
+        synchronized (singletonObjects) {
+            Object oldObject = getSingleton(beanName);
+            if (oldObject != null) {
+                throw new BeansException("Could not register object [" + singletonObject + "] " +
+                        "under bean name '" + beanName + "' there is already object [" +oldObject+ "] bound");
+            }
+            singletonObjects.put(beanName, singletonObject);
+        }
     }
 
     protected void addSingleton(String beanName, Object singleObject) {
