@@ -1,54 +1,13 @@
 package com.cdtft.springframework.beans.factory.support;
 
 /**
- * Test FactoryBean
- *
  * @author: wangcheng
- * @date: 2021年09月24 14:13
+ * @date: 2021年10月11 14:19
  */
-public class IUserService {
+public interface IUserService {
 
-    private String uid;
+    String queryUserInfo();
 
-    private String company;
+    String register(String userName);
 
-    private String location;
-
-    private IUserDao userDao;
-
-    public String queryUserInfo() {
-        return userDao.queryUserName(uid) + "," + company + "," + location;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public IUserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(IUserDao userDao) {
-        this.userDao = userDao;
-    }
 }
