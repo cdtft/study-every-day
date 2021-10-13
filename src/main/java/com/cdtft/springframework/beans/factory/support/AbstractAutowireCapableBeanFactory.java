@@ -12,6 +12,7 @@ import com.cdtft.springframework.beans.factory.InitializingBean;
 import com.cdtft.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
 import com.cdtft.springframework.beans.factory.config.BeanPostProcessor;
+import com.cdtft.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import com.cdtft.springframework.util.BeanUtil;
 import org.apache.commons.lang.StringUtils;
 
@@ -38,6 +39,12 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     protected Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException {
         Object bean = null;
         try {
+            //被增强的bean
+            bean = resolveBeforeInstantiation(beanName, beanDefinition);
+            if (bean != null) {
+                return bean;
+            }
+
             bean = createBeanInstance(beanName, beanDefinition, args);
 
             //填充bean属性
@@ -83,6 +90,27 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         List<BeanPostProcessor> beanPostProcessors = getBeanPostProcessors();
         for (BeanPostProcessor processor : beanPostProcessors) {
             processor.postProcessBeforeInitialization(bean, beanName);
+        }
+        return bean;
+    }
+
+    protected Object applyBeanPostProcessorsBeforeInstantiation(Class<?> beanClass, String beanName) {
+        for (BeanPostProcessor beanPostProcessor : getBeanPostProcessors()) {
+            if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
+                Object result = ((InstantiationAwareBeanPostProcessor) beanPostProcessor).postProcessBeforeInstantiation(beanClass, beanName);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
+    }
+
+    protected Object resolveBeforeInstantiation(String beanName, BeanDefinition beanDefinition) {
+        //这里可能就是代理bean
+        Object bean = applyBeanPostProcessorsBeforeInstantiation(beanDefinition.getBeanClass(), beanName);
+        if (bean != null) {
+            bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
         }
         return bean;
     }

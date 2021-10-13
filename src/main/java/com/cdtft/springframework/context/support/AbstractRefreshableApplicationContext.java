@@ -9,6 +9,7 @@ import com.cdtft.springframework.beans.factory.support.DefaultListableBeanFactor
  */
 public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
 
+    //这里就是上下文和BeanFactory建立起了联系
     private DefaultListableBeanFactory defaultListableBeanFactory;
 
     public AbstractRefreshableApplicationContext() {

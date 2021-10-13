@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 这种设计可以参考
+ *
  * @author: wangcheng
  * @date: 2021年10月01 19:15
  */
@@ -40,4 +42,13 @@ public class AspectjExpressionPointcut implements Pointcut, MethodMatcher, Class
         return pointcutExpression.couldMatchJoinPointsInType(targetClass);
     }
 
+    @Override
+    public ClassFilter getClassFilter() {
+        return this;
+    }
+
+    @Override
+    public MethodMatcher getMethodMatcher() {
+        return this;
+    }
 }
