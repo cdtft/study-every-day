@@ -31,18 +31,20 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         //创建BeanFactory并加载BeanDefinition
         refreshBeanFactory();
 
-
         ConfigurableListableBeanFactory beanFactory = getBeanFactory();
 
         beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
 
+        //提供修改BeanDefinition的机会
         invokeBeanFactoryPostProcessors(beanFactory);
 
         //组册beanPostProcessors
         registerBeanPostProcessors(beanFactory);
 
+        //初始化事件
         initApplicationEventMulticaster();
 
+        //注册事件监听器
         registerListeners();
 
         beanFactory.preInstantiateSingletons();
@@ -50,6 +52,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         registerShutdownHook();
 
         finishRefresh();
+
     }
 
     protected abstract void refreshBeanFactory() throws BeansException;
