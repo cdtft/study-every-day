@@ -22,7 +22,8 @@
 
     <bean id="testListener" class="com.cdtft.springframework.context.TestListener"/>
 
-    <bean id="DefaultAdvisorAutoProxyCreator" class="com.cdtft.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+    <!--  AOP和Bean的生命周期融合一体  -->
+    <bean id="defaultAdvisorAutoProxyCreator" class="com.cdtft.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
 
     <bean id="userServiceBeforeAdvice" class="com.cdtft.springframework.aop.aspectj.UserServiceBeforeAdvice"/>
 
@@ -30,6 +31,7 @@
         <property name="methodBeforeAdvice" ref="userServiceBeforeAdvice"/>
     </bean>
 
+    <!--  定义切面和通知方法  -->
     <bean id="pointcutAdvisor" class="com.cdtft.springframework.aop.AspectJExpressionPointcutAdvisor">
         <property name="expression" value="execution( * com.cdtft.springframework.beans.factory.support.IUserService.*(..))"/>
         <property name="advice" ref="methodBeforeAdviceInterceptor"/>
