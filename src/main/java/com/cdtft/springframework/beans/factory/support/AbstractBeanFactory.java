@@ -32,10 +32,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     public <T> T getBean(String name, Class<T> clazz) {
         Object bean = doGetBean(name, null);
 
-        if (clazz.isInstance(bean)) {
-            return clazz.cast(bean);
-        }
-        throw new BeansException("Fail to cast bean");
+        return (T) bean;
     }
 
     protected <T> T doGetBean(String beanName, Object[] args) {

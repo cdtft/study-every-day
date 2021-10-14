@@ -17,7 +17,7 @@ public class IUserServiceImpl implements IUserService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "xiao wang，100001，深圳";
+        return "xiao wang，100001，成都";
     }
 
     @Override

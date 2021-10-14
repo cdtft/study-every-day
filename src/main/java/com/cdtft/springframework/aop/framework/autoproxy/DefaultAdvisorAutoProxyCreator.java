@@ -38,6 +38,8 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
         if (isAopInfrastructureClass(beanClass)) {
             return null;
         }
+
+        //找到容器中所有的的通知和切入点
         Map<String, AspectJExpressionPointcutAdvisor> beansOfType = defaultListableBeanFactory.getBeansOfType(AspectJExpressionPointcutAdvisor.class);
         for (AspectJExpressionPointcutAdvisor advisor : beansOfType.values()) {
             if (!advisor.getPointcut().getClassFilter().matches(beanClass)) {

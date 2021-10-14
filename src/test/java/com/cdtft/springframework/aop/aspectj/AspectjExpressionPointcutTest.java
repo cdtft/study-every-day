@@ -8,6 +8,7 @@ import com.cdtft.springframework.aop.interceptor.UserServiceInterceptor;
 import com.cdtft.springframework.beans.factory.support.IUserService;
 import com.cdtft.springframework.beans.factory.support.IUserServiceImpl;
 import com.cdtft.springframework.beans.factory.support.UserDao;
+import com.cdtft.springframework.context.support.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
@@ -47,6 +48,15 @@ public class AspectjExpressionPointcutTest {
         System.out.println("queryUserInfo: " + proxyCglibUserService.queryUserInfo());
         System.out.println("register: " + proxyJDKUserService.register("wangcheng"));
 
+    }
+
+    @Test
+    public void testAOP() {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext();
+
+        IUserService iUserService = context.getBean("iUserService", IUserService.class);
+
+        System.out.println("测试结果:" + iUserService.queryUserInfo());
 
     }
 

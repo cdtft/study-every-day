@@ -4,6 +4,8 @@ import com.cdtft.springframework.aop.aspectj.AspectjExpressionPointcut;
 import org.aopalliance.aop.Advice;
 
 /**
+ * 切入点和通知的集合
+ *
  * @author: wangcheng
  * @date: 2021年10月12 14:10
  */
@@ -11,7 +13,7 @@ public class AspectJExpressionPointcutAdvisor implements PointcutAdvisor {
 
     private AspectjExpressionPointcut pointcut;
 
-    private Advisor advisor;
+    private Advice advice;
 
     private String expression;
 
@@ -23,16 +25,19 @@ public class AspectJExpressionPointcutAdvisor implements PointcutAdvisor {
         return pointcut;
     }
 
-    @Override
-    public Advice getAdvice() {
-        return advisor.getAdvice();
-    }
 
-    public void setAdvisor(Advisor advisor) {
-        this.advisor = advisor;
-    }
 
     public void setExpression(String expression) {
         this.expression = expression;
     }
+
+    @Override
+    public Advice getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(Advice advice) {
+        this.advice = advice;
+    }
+
 }
