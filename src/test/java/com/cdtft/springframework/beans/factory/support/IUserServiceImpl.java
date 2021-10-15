@@ -1,5 +1,7 @@
 package com.cdtft.springframework.beans.factory.support;
 
+import com.cdtft.springframework.stereotype.Component;
+
 import java.util.Random;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Random;
  * @author: wangcheng
  * @date: 2021年09月24 14:13
  */
+@Component("iUserService")
 public class IUserServiceImpl implements IUserService {
 
     @Override

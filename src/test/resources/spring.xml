@@ -3,22 +3,9 @@
 
     <bean id="userDao" class="com.cdtft.springframework.beans.factory.support.UserDao" init-method="initData" destroy-method="clearData"/>
 
-    <bean id="userService" class="com.cdtft.springframework.beans.factory.support.UserService">
-        <property name="userId" value="1"/>
-        <property name="userDao" ref="userDao"/>
-    </bean>
-
     <bean id="TestBeanPostProcessor" class="com.cdtft.springframework.beans.factory.support.TestBeanPostProcessor"/>
 
     <bean id="proxyUserDao" class="com.cdtft.springframework.beans.factory.support.ProxyFactoryBean"/>
-
-    <bean id="iUserService" class="com.cdtft.springframework.beans.factory.support.IUserServiceImpl">
-        <property name="uid" value="10001"/>
-        <property name="company" value="腾讯"/>
-        <property name="location" value="深圳"/>
-        <property name="userDao" ref="proxyUserDao"/>
-    </bean>
-
 
     <bean id="testListener" class="com.cdtft.springframework.context.TestListener"/>
 
@@ -36,5 +23,7 @@
         <property name="expression" value="execution( * com.cdtft.springframework.beans.factory.support.IUserService.*(..))"/>
         <property name="advice" ref="methodBeforeAdviceInterceptor"/>
     </bean>
+
+    <component-scan base-package="com.cdtft.springframework"/>
 
 </beans>

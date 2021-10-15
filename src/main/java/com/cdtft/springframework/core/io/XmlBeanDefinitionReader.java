@@ -6,6 +6,7 @@ import com.cdtft.springframework.beans.BeansException;
 import com.cdtft.springframework.beans.PropertyValue;
 import com.cdtft.springframework.beans.factory.config.BeanDefinition;
 import com.cdtft.springframework.beans.factory.support.BeanDefinitionRegistry;
+import com.cdtft.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -62,13 +63,29 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     private void doLoadBeanDefinitions(InputStream inputStream) throws ClassNotFoundException {
         Document doc = XmlUtil.readXML(inputStream);
         Element root = doc.getDocumentElement();
+
         NodeList childNodes = root.getChildNodes();
+
+        NodeList componentScanList = root.getElementsByTagName("component-scan");
+        if (componentScanList != null && componentScanList.getLength() > 0) {
+            for (int i = 0; i < componentScanList.getLength(); i++) {
+                Element element = (Element) componentScanList.item(i);
+                String basePackage = element.getAttribute("base-package");
+                if (StringUtils.isNotBlank(basePackage)) {
+                    scanPackage(basePackage);
+                }
+            }
+        }
 
         for (int i = 0; i < childNodes.getLength(); i++) {
             // 判断元素
-            if (!(childNodes.item(i) instanceof Element)) continue;
+            if (!(childNodes.item(i) instanceof Element)) {
+                continue;
+            }
             // 判断对象
-            if (!"bean".equals(childNodes.item(i).getNodeName())) continue;
+            if (!"bean".equals(childNodes.item(i).getNodeName())) {
+                continue;
+            }
 
             // 解析标签
             Element bean = (Element) childNodes.item(i);
@@ -118,6 +135,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             // 注册 BeanDefinition
             getRegistry().registerBeanDefinition(beanName, beanDefinition);
         }
+    }
+
+    private void scanPackage(String scanPath) {
+        ClassPathBeanDefinitionScanner classPathBeanDefinitionScanner = new ClassPathBeanDefinitionScanner(getRegistry());
+        classPathBeanDefinitionScanner.doScan(scanPath);
     }
 
 }

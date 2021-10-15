@@ -119,7 +119,7 @@ public class DefaultListableBeanFactoryTest {
     @Test
     public void testProxyUserDao() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext();
-        IUserServiceImpl iUserService = context.getBean("iUserService", IUserServiceImpl.class);
+        IUserService iUserService = context.getBean("iUserService", IUserServiceImpl.class);
         System.out.println(iUserService.queryUserInfo());
 
     }
