@@ -47,6 +47,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
             bean = createBeanInstance(beanName, beanDefinition, args);
 
+            //填充bean的属性前提供修改BeanDefinition中的PropertyValue属性,
+            //自动注入也是基于此
+            applyBeanPostProcessorBeforeApplyingPropertyValue(beanName, bean, beanDefinition);
+
             //填充bean属性
             applyBeanPropertyValues(beanName, bean, beanDefinition);
 
@@ -183,6 +187,19 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     private void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
         if (bean instanceof DisposableBean || StringUtils.isNotBlank(beanDefinition.getDestroyMethodName())) {
             registerDisposableBean(beanName, bean, beanDefinition);
+        }
+    }
+
+    protected void applyBeanPostProcessorBeforeApplyingPropertyValue(String beanName, Object bean, BeanDefinition beanDefinition) {
+        for (BeanPostProcessor beanPostProcessor : getBeanPostProcessors()) {
+            if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
+                PropertyValues propertyValues = ((InstantiationAwareBeanPostProcessor) beanPostProcessor).postProcessPropertyValues(beanDefinition.getPropertyValues(), bean, beanName);
+                if (propertyValues != null) {
+                    for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                        beanDefinition.getPropertyValues().addPropertyValue(propertyValue);
+                    }
+                }
+            }
         }
     }
 

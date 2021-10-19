@@ -58,4 +58,15 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         return new String[0];
     }
 
+    @Override
+    public <T> T getBean(Class<T> clazz) {
+        Map<String, T> beansOfType = getBeansOfType(clazz);
+        if (beansOfType == null || beansOfType.isEmpty()) {
+            throw new BeansException("no bean match required type :" + clazz.getName());
+        }
+        if (beansOfType.size() > 1) {
+            throw new BeansException("required type " + clazz.getName() + " expected single matching bean but found " + beansOfType.size());
+        }
+        return (T) beansOfType.values().stream().findFirst();
+    }
 }
