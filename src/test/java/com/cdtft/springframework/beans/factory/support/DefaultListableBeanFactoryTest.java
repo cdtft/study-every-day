@@ -28,7 +28,6 @@ public class DefaultListableBeanFactoryTest {
         BeanDefinition beanDefinition = new BeanDefinition(UserService.class);
         defaultListableBeanFactory.registerBeanDefinition("userService", beanDefinition);
         UserService userService = (UserService) defaultListableBeanFactory.getBean("userService");
-        userService.sayHi();
     }
 
     /**
@@ -40,7 +39,6 @@ public class DefaultListableBeanFactoryTest {
         BeanDefinition beanDefinition = new BeanDefinition(UserService.class);
         defaultListableBeanFactory.registerBeanDefinition("userService", beanDefinition);
         UserService userService = (UserService) defaultListableBeanFactory.getBean("userService");
-        userService.printName();
     }
 
     /**
@@ -72,7 +70,6 @@ public class DefaultListableBeanFactoryTest {
         beanFactory.registerBeanDefinition("userService", userServiceBeanDefinition);
 
         UserService userService = (UserService) beanFactory.getBean("userService");
-        userService.printUid();
     }
 
     @Test
@@ -81,7 +78,6 @@ public class DefaultListableBeanFactoryTest {
         XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         xmlBeanDefinitionReader.loadBeanDefinitions("classpath:spring.xml");
         UserService userService = (UserService) beanFactory.getBean("userService");
-        userService.printName();
     }
 
     @Test
@@ -112,9 +108,7 @@ public class DefaultListableBeanFactoryTest {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext();
         applicationContext.refresh();
         UserService userService = applicationContext.getBean("userService", UserService.class);
-        userService.printName();
     }
-
 
     @Test
     public void testProxyUserDao() {
@@ -122,5 +116,12 @@ public class DefaultListableBeanFactoryTest {
         IUserService iUserService = context.getBean("iUserService", IUserServiceImpl.class);
         System.out.println(iUserService.queryUserInfo());
 
+    }
+
+    @Test
+    public void testAutowired() {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext();
+        UserService userService = context.getBean("userService", UserService.class);
+        System.out.println(userService.print());
     }
 }

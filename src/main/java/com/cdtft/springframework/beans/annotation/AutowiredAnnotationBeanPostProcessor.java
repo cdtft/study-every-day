@@ -8,6 +8,7 @@ import com.cdtft.springframework.beans.factory.BeanFactoryAware;
 import com.cdtft.springframework.beans.factory.ConfigurableListableBeanFactory;
 import com.cdtft.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import com.cdtft.springframework.core.io.ClassUtils;
+import com.cdtft.springframework.stereotype.Component;
 import com.cdtft.springframework.util.BeanUtil;
 
 import java.lang.reflect.Field;
@@ -18,6 +19,7 @@ import java.lang.reflect.Field;
  * @author: wangcheng
  * @date: 2021年10月18 11:27
  */
+@Component
 public class AutowiredAnnotationBeanPostProcessor implements InstantiationAwareBeanPostProcessor, BeanFactoryAware {
 
     private ConfigurableListableBeanFactory beanFactory;

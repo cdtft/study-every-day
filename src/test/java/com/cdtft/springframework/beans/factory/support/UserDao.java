@@ -1,5 +1,7 @@
 package com.cdtft.springframework.beans.factory.support;
 
+import com.cdtft.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +9,7 @@ import java.util.Map;
  * @author: wangcheng
  * @date: 2021年08月27 11:29
  */
+@Component
 public class UserDao {
 
     private static final Map<Integer, String> idToUserNameMap = new HashMap<>();
@@ -25,6 +28,7 @@ public class UserDao {
     }
 
     public String findByUserNameById(Integer userId) {
+        initData();
         return idToUserNameMap.get(userId);
     }
 }

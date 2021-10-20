@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
 
-    <bean id="userDao" class="com.cdtft.springframework.beans.factory.support.UserDao" init-method="initData" destroy-method="clearData"/>
-
-    <bean id="TestBeanPostProcessor" class="com.cdtft.springframework.beans.factory.support.TestBeanPostProcessor"/>
+<!--    <bean id="TestBeanPostProcessor" class="com.cdtft.springframework.beans.factory.support.TestBeanPostProcessor"/>-->
 
     <bean id="proxyUserDao" class="com.cdtft.springframework.beans.factory.support.ProxyFactoryBean"/>
 

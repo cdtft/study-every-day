@@ -1,33 +1,20 @@
 package com.cdtft.springframework.beans.factory.support;
 
+import com.cdtft.springframework.beans.annotation.Autowired;
+import com.cdtft.springframework.stereotype.Component;
+
 /**
  * @author: wangcheng
  * @date: 2021年08月04 17:23
  */
+@Component
 public class UserService {
 
+    @Autowired
     private UserDao userDao;
 
-    private Integer userId;
-
-    public void sayHi() {
-        System.out.println("hi!");
-    }
-
-    public void printName() {
-        System.out.println(userDao.findByUserNameById(userId));
-    }
-
-    public void printUid() {
-        System.out.println(userId);
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public String print() {
+        return userDao.findByUserNameById(1);
     }
 
 }

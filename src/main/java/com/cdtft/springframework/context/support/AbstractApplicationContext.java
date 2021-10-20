@@ -94,6 +94,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     }
 
     @Override
+    public <T> T getBean(Class<T> clazz) {
+        return getBeanFactory().getBean(clazz);
+    }
+
+    @Override
     public String[] getBeanDefinitionNames() {
         return getBeanFactory().getBeanDefinitionNames();
     }

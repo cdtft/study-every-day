@@ -12,7 +12,6 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if (beanName.equals("userService")) {
             UserService userService = (UserService) bean;
-            userService.setUserId(2);
             System.out.println("修改userId为2");
         }
         return bean;

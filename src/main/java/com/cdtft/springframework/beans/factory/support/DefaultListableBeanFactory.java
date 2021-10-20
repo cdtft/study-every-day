@@ -67,6 +67,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         if (beansOfType.size() > 1) {
             throw new BeansException("required type " + clazz.getName() + " expected single matching bean but found " + beansOfType.size());
         }
-        return (T) beansOfType.values().stream().findFirst();
+        return beansOfType.values().stream().findFirst().get();
     }
 }
