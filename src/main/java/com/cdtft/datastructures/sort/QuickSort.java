@@ -16,34 +16,36 @@ public class QuickSort {
     }
 
     public static void quickSort(int leftPoint, int rightPoint, int[] data) {
-        if (leftPoint >= rightPoint) {
+        if (leftPoint > rightPoint) {
             return;
         }
-        int middle = partition(leftPoint, rightPoint, data);
-        quickSort(leftPoint, middle -1, data);
-        quickSort(middle + 1, rightPoint, data);
+        int partition = partition(leftPoint, rightPoint, data);
+        quickSort(leftPoint, partition - 1, data);
+        quickSort(partition + 1, rightPoint, data);
     }
 
 
     private static int partition(int leftPoint, int rightPoint, int[] data) {
-        int leftMaxIdx = leftPoint;
-        int rightMaxIdx = rightPoint;
-        int pivotPoint = rightPoint;
-        int pivot = data[pivotPoint];
+        int originLeftIdx = leftPoint;
+        int originRightIdx = rightPoint;
+        int pivot = rightPoint;
+        int pivotData = data[pivot];
         rightPoint--;
         while (true) {
-            while(data[leftPoint] < pivot && leftPoint < rightMaxIdx) {
-                leftPoint++;
-            }
-            while (data[rightPoint] > pivot && rightPoint > leftMaxIdx) {
+            while (data[rightPoint] > pivotData && rightPoint > originLeftIdx) {
                 rightPoint--;
+            }
+            while (data[leftPoint] < pivotData && leftPoint < originRightIdx) {
+                leftPoint++;
             }
             if (leftPoint >= rightPoint) {
                 break;
             }
-            swap(rightPoint, leftPoint, data);
+            swap(leftPoint, rightPoint, data);
         }
-        swap(leftPoint, pivotPoint, data);
+
+        swap(pivot, leftPoint, data);
+
         return leftPoint;
     }
 
