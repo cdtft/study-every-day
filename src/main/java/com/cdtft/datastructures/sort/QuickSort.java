@@ -44,6 +44,8 @@ public class QuickSort {
             swap(leftPoint, rightPoint, data);
         }
 
+        //为什么要交换标准值和leftPoint所指向的值
+        //这是应为标准值值取的是最右边的值的原因
         swap(pivot, leftPoint, data);
 
         return leftPoint;
