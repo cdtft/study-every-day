@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class MinStack {
 
+
+
     private Integer minValue;
 
     private List<Node> nodeList;

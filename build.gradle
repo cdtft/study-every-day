@@ -22,7 +22,10 @@ dependencies {
             'cglib:cglib:3.3.0',
             'cn.hutool:hutool-all:5.5.0',
             'org.aspectj:aspectjweaver:1.9.7',
-            'aopalliance:aopalliance:1.0'
+            'aopalliance:aopalliance:1.0',
+
+            'org.apache.logging.log4j:log4j-api:2.14.0',
+            'org.apache.logging.log4j:log4j-core:2.14.0'
     )
     implementation group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.5.18'
 }
