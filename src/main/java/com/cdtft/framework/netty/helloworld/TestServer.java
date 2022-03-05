@@ -15,7 +15,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 public class TestServer {
 
     public static void main(String[] args) {
+
+        //创建两个线程组
+        //用于接受客户端的请求链接
         EventLoopGroup bossGroup = new NioEventLoopGroup();
+        //接受主线程的任务
         EventLoopGroup workGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap bootstrap = new ServerBootstrap().group(bossGroup, workGroup)
