@@ -3,7 +3,10 @@ package com.cdtft.framework.netty.helloworld;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
+
+import java.nio.charset.Charset;
 
 /**
  * 添加http的处理器,channel注册后执行初始化方法
@@ -18,8 +21,11 @@ public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
         //获得管道
         ChannelPipeline channelPipeline = ch.pipeline();
         //编码解码处理器
-        channelPipeline.addLast("httpServerCodec", new HttpServerCodec());
+        //channelPipeline.addLast("httpServerCodec", new HttpServerCodec());
         //添加自定义http处理器
-        channelPipeline.addLast("testHttpServerHandler", new TestHttpServerHandler());
+        //channelPipeline.addLast("testHttpServerHandler", new TestHttpServerHandler());
+        channelPipeline.addLast(new LineBasedFrameDecoder(1024));
+        channelPipeline.addLast(new StringDecoder(Charset.forName("GBK")));
+        channelPipeline.addLast(new MyServerHandler());
     }
 }
