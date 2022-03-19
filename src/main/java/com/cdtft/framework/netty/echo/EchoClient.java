@@ -20,7 +20,6 @@ public class EchoClient {
 
     private static final int PORT = 8080;
 
-    static final int SIZE = 256;
 
     public static void main(String[] args) throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();

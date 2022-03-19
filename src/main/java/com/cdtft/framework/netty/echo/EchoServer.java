@@ -35,6 +35,7 @@ public class EchoServer {
                             pipeline.addLast(new EchoServerHandler());
                         }
                     });
+            //阻塞当前线程并知道它完成
             ChannelFuture sync = bootstrap.bind(PORT).sync();
             sync.channel().closeFuture().sync();
         } finally {
