@@ -1,4 +1,4 @@
-package com.cdtft.framework.netty.echo;
+package com.cdtft.framework.netty.inaction.chapter02;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
