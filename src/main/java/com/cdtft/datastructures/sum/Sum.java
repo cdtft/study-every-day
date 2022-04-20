@@ -28,7 +28,7 @@ public class Sum {
             fn2 = fn2 + fn1;
             //等于上一个fn2
             fn1 = fn2 - fn1;
-            System.out.println("fn(" + i + ") = " + fn1);
+//            System.out.println("fn(" + i + ") = " + fn1);
         }
         return fn2;
     }
